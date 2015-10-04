@@ -9,7 +9,6 @@
 #import "NotesViewController.h"
 #import "SWRevealViewController.h"
 #import <CoreData/CoreData.h>
-//#import "NotesEntry.h"
 #import "NotesCoreDataStack.h"
 #import "NewNotesEntity.h"
 

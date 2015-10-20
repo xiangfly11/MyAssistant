@@ -147,7 +147,7 @@
                         self.locationLabel.text = [NSString stringWithFormat:@"City:%@    Country Code:%@",cityName,countryCode];
                         
                         
-                        //NSLog(@"Temp:%@",self.tempLabel.text);
+                        NSLog(@"Temp:%@",self.tempLabel.text);
                     });
 
                 }else {

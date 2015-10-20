@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 
 @property (nonatomic) CLLocationManager *locationManager;
-
+//@property (nonatomic) DirectionViewController *testViewController;
 @end
 
 @implementation DirectionViewController
@@ -37,6 +37,21 @@
     self.myMapView.mapType = MKMapTypeHybrid;
     
     self.myMapView.showsUserLocation = YES;
+    
+    
+    //MKPlacemark *startPlacemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(40.565849, -74.361953) addressDictionary:nil];
+    //MKPlacemark *endPlacemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(40.543401, -74.533935) addressDictionary:nil];
+    
+    //self.startItem = [[MKMapItem alloc] initWithPlacemark:startPlacemark];
+    //self.endItem = [[MKMapItem alloc] initWithPlacemark:endPlacemark];
+    
+    
+    NSLog(@"slongitude:%.6f",self.startItem.placemark.coordinate.longitude);
+    NSLog(@"slatidude:%.6f",self.startItem.placemark.coordinate.latitude);
+    
+    NSLog(@"dlongitude:%.6f",self.endItem.placemark.coordinate.longitude);
+    NSLog(@"dlatidude:%.6f",self.endItem.placemark.coordinate.latitude);
+
 //    
 //    MKCoordinateRegion *region = MKCoordinateRegionMakeWithDistance(self.startCoordinate, 2000, 2000);
     
@@ -77,6 +92,8 @@
     [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse * _Nullable response, NSError * _Nullable error) {
         if (!error) {
             [self showRoute:response];
+        }else {
+            NSLog(@"Directions Error:%@",error.localizedDescription);
         }
     }];
     

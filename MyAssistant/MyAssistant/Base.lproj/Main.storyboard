@@ -303,7 +303,7 @@
                                 <state key="normal" title="Get Directions"/>
                                 <connections>
                                     <action selector="getDirectionAction:" destination="AaE-9V-IZF" eventType="touchUpInside" id="glC-BB-iP2"/>
-                                    <segue destination="bdq-nX-C6n" kind="modal" identifier="goToDirection" id="O61-4b-Bza"/>
+                                    <segue destination="bdq-nX-C6n" kind="modal" identifier="goToDirection" id="bj4-H1-ghb"/>
                                 </connections>
                             </button>
                         </subviews>

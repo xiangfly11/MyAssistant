@@ -38,6 +38,7 @@
 		70B19DB51B978965009B9692 /* MainViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B19DB41B978965009B9692 /* MainViewCell.m */; };
 		7A12C15A1BBC452A0017C758 /* city_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C1591BBC452A0017C758 /* city_list.txt */; settings = {ASSET_TAGS = (); }; };
 		7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
+		7A8BE84E1BD7224700D65C40 /* RouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84D1BD7224700D65C40 /* RouteViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		7A12C1591BBC452A0017C758 /* city_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = city_list.txt; sourceTree = "<group>"; };
 		7A8BE8491BD6EE0F00D65C40 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		7A8BE84C1BD7224700D65C40 /* RouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteViewController.h; sourceTree = "<group>"; };
+		7A8BE84D1BD7224700D65C40 /* RouteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteViewController.m; sourceTree = "<group>"; };
 		CFF94070217D615C18D32B23 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECF3972D27580B05C52AAED3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,6 +236,8 @@
 				700BB3A51B9FD8E600C95757 /* MainViewCellWithoutImage.m */,
 				7A8BE8491BD6EE0F00D65C40 /* MapViewController.h */,
 				7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */,
+				7A8BE84C1BD7224700D65C40 /* RouteViewController.h */,
+				7A8BE84D1BD7224700D65C40 /* RouteViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				2E4CD4C81B88161A00578925 /* AppDelegate.m in Sources */,
 				2EF21A751B901A48008FD30A /* NewsEntryBuilder.m in Sources */,
 				2E428EFC1B8F97E300048715 /* CoreData.xcdatamodeld in Sources */,
+				7A8BE84E1BD7224700D65C40 /* RouteViewController.m in Sources */,
 				2EF21A7E1B90D41E008FD30A /* NotesCoreDataStack.m in Sources */,
 				2EF21A721B901897008FD30A /* NewsEntry.m in Sources */,
 				7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */,

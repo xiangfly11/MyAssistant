@@ -10,12 +10,16 @@
 #import "SWRevealViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "RouteViewController.h"
 
 @interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate> {
     
     NSString *searchBarInput;
     NSMutableArray *annotations;
     NSMutableArray *resultPlacemark;
+    NSMutableArray *resultMapItem;
+    
+    NSUInteger selectedRowIndex;
     
 }
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *slideMenuButton;
@@ -45,6 +49,7 @@
     
     annotations = [[NSMutableArray alloc] init];
     resultPlacemark = [[NSMutableArray alloc] init];
+    resultMapItem = [[NSMutableArray alloc] init];
     
     self.searchBar.delegate = self;
     self.mapView.delegate = self;
@@ -98,6 +103,7 @@
         [self.mapView removeAnnotations: annotations];
         [annotations removeAllObjects];
         [resultPlacemark removeAllObjects];
+        [resultMapItem removeAllObjects];
     }
     [self performSearchWithInput:searchBarInput];
     
@@ -143,6 +149,7 @@
                 
                 [annotations addObject:annotation];
                 [resultPlacemark addObject:placemark];
+                [resultMapItem addObject:item];
                 [self.mapView addAnnotation:annotation];
                 
             }
@@ -217,17 +224,30 @@
     return annotations.count;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    selectedRowIndex = indexPath.row;
+    [self performSegueWithIdentifier:@"goToRoute" sender:tableView];
+}
 
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    RouteViewController *routeViewController = (RouteViewController *)[segue destinationViewController];
+    
+    MKPlacemark *currentPlacemark = [[MKPlacemark alloc] initWithCoordinate:self.currentLocation.coordinate addressDictionary:nil];
+    routeViewController.startMapItem = [[MKMapItem alloc] initWithPlacemark:currentPlacemark];
+    
+    routeViewController.endMapItem = resultMapItem[selectedRowIndex];
+    
 }
-*/
+
 
 @end

@@ -21,7 +21,6 @@
 		2E4CD4F11B88186200578925 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4CD4F01B88186200578925 /* MainViewController.m */; };
 		2E98EFC41B898A8E00F7E923 /* SlideMenuItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E98EFC31B898A8E00F7E923 /* SlideMenuItems.m */; };
 		2EA6C3A71B8AAEF5002B549F /* ForcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6C3A61B8AAEF5002B549F /* ForcastViewController.m */; };
-		2EA6C3AA1B8AAF36002B549F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6C3A91B8AAF36002B549F /* MapViewController.m */; };
 		2EA6C3AD1B8AAF48002B549F /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6C3AC1B8AAF48002B549F /* NotesViewController.m */; };
 		2EBF11891B964B15000EB632 /* NewsConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF11881B964B15000EB632 /* NewsConnection.m */; };
 		2EBF118C1B964B2C000EB632 /* NewsManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF118B1B964B2C000EB632 /* NewsManage.m */; };
@@ -38,7 +37,7 @@
 		708D61261B989CA000570160 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 708D61251B989CA000570160 /* Podfile */; };
 		70B19DB51B978965009B9692 /* MainViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B19DB41B978965009B9692 /* MainViewCell.m */; };
 		7A12C15A1BBC452A0017C758 /* city_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C1591BBC452A0017C758 /* city_list.txt */; settings = {ASSET_TAGS = (); }; };
-		7A12C15D1BBCDA320017C758 /* DirectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12C15C1BBCDA320017C758 /* DirectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +74,6 @@
 		2E98EFC31B898A8E00F7E923 /* SlideMenuItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuItems.m; sourceTree = "<group>"; };
 		2EA6C3A51B8AAEF5002B549F /* ForcastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForcastViewController.h; sourceTree = "<group>"; };
 		2EA6C3A61B8AAEF5002B549F /* ForcastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForcastViewController.m; sourceTree = "<group>"; };
-		2EA6C3A81B8AAF36002B549F /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		2EA6C3A91B8AAF36002B549F /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		2EA6C3AB1B8AAF48002B549F /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
 		2EA6C3AC1B8AAF48002B549F /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
 		2EBF11851B9648CE000EB632 /* NewsConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsConnectionDelegate.h; sourceTree = "<group>"; };
@@ -109,8 +106,8 @@
 		70B19DB41B978965009B9692 /* MainViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewCell.m; sourceTree = "<group>"; };
 		70CD6A431AF79857F5550714 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7A12C1591BBC452A0017C758 /* city_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = city_list.txt; sourceTree = "<group>"; };
-		7A12C15B1BBCDA320017C758 /* DirectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionViewController.h; sourceTree = "<group>"; };
-		7A12C15C1BBCDA320017C758 /* DirectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionViewController.m; sourceTree = "<group>"; };
+		7A8BE8491BD6EE0F00D65C40 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		CFF94070217D615C18D32B23 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECF3972D27580B05C52AAED3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -220,8 +217,6 @@
 				2E4CD4F01B88186200578925 /* MainViewController.m */,
 				2EA6C3A51B8AAEF5002B549F /* ForcastViewController.h */,
 				2EA6C3A61B8AAEF5002B549F /* ForcastViewController.m */,
-				2EA6C3A81B8AAF36002B549F /* MapViewController.h */,
-				2EA6C3A91B8AAF36002B549F /* MapViewController.m */,
 				2EA6C3AB1B8AAF48002B549F /* NotesViewController.h */,
 				2EA6C3AC1B8AAF48002B549F /* NotesViewController.m */,
 				2EF21A821B90F67F008FD30A /* SlideMenuCell.h */,
@@ -236,8 +231,8 @@
 				705074611B9DDE5700F07C9C /* EditNotesViewController.m */,
 				700BB3A41B9FD8E600C95757 /* MainViewCellWithoutImage.h */,
 				700BB3A51B9FD8E600C95757 /* MainViewCellWithoutImage.m */,
-				7A12C15B1BBCDA320017C758 /* DirectionViewController.h */,
-				7A12C15C1BBCDA320017C758 /* DirectionViewController.m */,
+				7A8BE8491BD6EE0F00D65C40 /* MapViewController.h */,
+				7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -428,15 +423,14 @@
 				2E428EFC1B8F97E300048715 /* CoreData.xcdatamodeld in Sources */,
 				2EF21A7E1B90D41E008FD30A /* NotesCoreDataStack.m in Sources */,
 				2EF21A721B901897008FD30A /* NewsEntry.m in Sources */,
+				7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */,
 				2E4CD4C51B88161A00578925 /* main.m in Sources */,
-				2EA6C3AA1B8AAF36002B549F /* MapViewController.m in Sources */,
 				2EA6C3A71B8AAEF5002B549F /* ForcastViewController.m in Sources */,
 				2EBF118C1B964B2C000EB632 /* NewsManage.m in Sources */,
 				700BB3A61B9FD8E600C95757 /* MainViewCellWithoutImage.m in Sources */,
 				705074621B9DDE5700F07C9C /* EditNotesViewController.m in Sources */,
 				70B19DB51B978965009B9692 /* MainViewCell.m in Sources */,
 				2E2156111B94E6D000012F02 /* SlideMenuViewController.m in Sources */,
-				7A12C15D1BBCDA320017C758 /* DirectionViewController.m in Sources */,
 				2EBF11891B964B15000EB632 /* NewsConnection.m in Sources */,
 				2E4CD4EA1B8816D400578925 /* SWRevealViewController.m in Sources */,
 				2EF21A841B90F67F008FD30A /* SlideMenuCell.m in Sources */,

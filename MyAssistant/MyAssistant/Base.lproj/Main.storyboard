@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Reveal View Controller-->
@@ -227,69 +228,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3K-Me-PGw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Start Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3K-Me-PGw">
                                 <rect key="frame" x="20" y="94" width="108" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mMa-pS-s0l">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mMa-pS-s0l">
                                 <rect key="frame" x="20" y="123" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ekA-G4-ifb">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ekA-G4-ifb">
                                 <rect key="frame" x="20" y="161" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fOr-E5-t9C">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fOr-E5-t9C">
                                 <rect key="frame" x="20" y="199" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwZ-s5-3O0">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pwZ-s5-3O0">
                                 <rect key="frame" x="20" y="237" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RgZ-7x-lZE">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Street Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RgZ-7x-lZE">
                                 <rect key="frame" x="20" y="362" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hVr-PN-mge">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hVr-PN-mge">
                                 <rect key="frame" x="20" y="400" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6en-k3-bkN">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6en-k3-bkN">
                                 <rect key="frame" x="20" y="438" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zor-45-y8A">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zor-45-y8A">
                                 <rect key="frame" x="20" y="333" width="108" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IRA-5b-i7k">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IRA-5b-i7k">
                                 <rect key="frame" x="20" y="476" width="280" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USS-zn-mub">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USS-zn-mub">
                                 <rect key="frame" x="88" y="275" width="144" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Get Current Location"/>
@@ -297,7 +298,7 @@
                                     <action selector="getCurrentLocationAction:" destination="AaE-9V-IZF" eventType="touchUpInside" id="a1K-6e-nDb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-UI-CED">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-UI-CED">
                                 <rect key="frame" x="88" y="514" width="144" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Get Directions"/>
@@ -365,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJ3-8o-y9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1273" y="965"/>
+            <point key="canvasLocation" x="-54" y="-241"/>
         </scene>
         <!--Map-->
         <scene sceneID="NKr-cm-6Nl">
@@ -415,7 +416,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-371" y="965"/>
+            <point key="canvasLocation" x="1141" y="-251"/>
         </scene>
         <!--News-->
         <scene sceneID="AxC-4R-Olu">
@@ -743,12 +744,89 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="AaE-9V-IZF" kind="relationship" relationship="rootViewController" id="Ptl-Ih-eQX"/>
+                        <segue destination="oRP-AP-gbt" kind="relationship" relationship="rootViewController" id="e5y-zh-yep"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GEd-wJ-8RG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1748" y="970"/>
+            <point key="canvasLocation" x="-1702" y="881"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="huP-ie-WxE">
+            <objects>
+                <viewController id="oRP-AP-gbt" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bxY-hR-5Xj"/>
+                        <viewControllerLayoutGuide type="bottom" id="bam-FD-xfe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rEr-FW-yhd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxA-nq-tSt">
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gxA-nq-tSt" secondAttribute="height" multiplier="80:11" id="qld-ED-Rq9"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="etd-UM-cDc">
+                                <rect key="frame" x="0.0" y="116" width="320" height="270"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="etd-UM-cDc" secondAttribute="height" multiplier="32:27" id="QfD-oK-Nj3"/>
+                                </constraints>
+                            </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="27" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="auf-WM-KYM">
+                                <rect key="frame" x="0.0" y="394" width="320" height="174"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="auf-WM-KYM" secondAttribute="height" multiplier="160:87" id="IYh-W2-tMr"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="27" id="YIN-w1-XPn">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="27"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YIN-w1-XPn" id="VF5-ES-D7q">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="26"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gxA-nq-tSt" secondAttribute="trailing" id="BGa-8S-XBf"/>
+                            <constraint firstItem="auf-WM-KYM" firstAttribute="top" secondItem="etd-UM-cDc" secondAttribute="bottom" constant="8" id="FKl-FK-U9T"/>
+                            <constraint firstItem="etd-UM-cDc" firstAttribute="top" secondItem="gxA-nq-tSt" secondAttribute="bottom" id="Fay-1o-zGd"/>
+                            <constraint firstAttribute="trailing" secondItem="auf-WM-KYM" secondAttribute="trailing" id="JxB-CR-8bm"/>
+                            <constraint firstItem="gxA-nq-tSt" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="MJQ-7e-baU"/>
+                            <constraint firstAttribute="trailing" secondItem="etd-UM-cDc" secondAttribute="trailing" id="Q16-rt-OSF"/>
+                            <constraint firstItem="gxA-nq-tSt" firstAttribute="top" secondItem="bxY-hR-5Xj" secondAttribute="bottom" constant="8" id="XP0-eY-g4u"/>
+                            <constraint firstItem="etd-UM-cDc" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="eRF-sa-1qw"/>
+                            <constraint firstItem="bam-FD-xfe" firstAttribute="top" secondItem="auf-WM-KYM" secondAttribute="bottom" id="tNv-zO-YfQ"/>
+                            <constraint firstItem="auf-WM-KYM" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="z46-UV-Hsv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="KID-MK-tl5">
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="gtW-q3-LUW"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="etd-UM-cDc" id="4bz-52-tbf"/>
+                        <outlet property="searchBar" destination="gxA-nq-tSt" id="iVo-MV-mOQ"/>
+                        <outlet property="slideMenuButton" destination="gtW-q3-LUW" id="eM2-Ti-15A"/>
+                        <outlet property="tableView" destination="auf-WM-KYM" id="Oen-Dz-NUc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V8Y-ru-UIY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1288" y="881"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NDx-R3-63x">
@@ -806,7 +884,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sQf-4N-x7t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-801" y="965"/>
+            <point key="canvasLocation" x="527" y="-251"/>
         </scene>
     </scenes>
     <resources>
@@ -814,6 +892,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="D3g-uH-OFN"/>
-        <segue reference="gJZ-tA-3Ea"/>
+        <segue reference="L1c-4y-vjN"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -83,14 +83,24 @@
     
     
     NSString *urlStr;
+    NSString *modifiedCountryName = [[NSString alloc] init];
+    modifiedCountryName = [countryName stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSString *modifiedCityName = [[NSString alloc] init];
+    modifiedCityName = [cityName stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (![countryName isEqualToString:@""]) {
-        urlStr = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@",cityName,countryName];
+        
+        
+        
+        urlStr = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",modifiedCityName,modifiedCountryName];
     }else {
-        urlStr = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@",cityName];
+        urlStr = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",modifiedCityName];
+        NSLog(@"===========%@",urlStr);
     }
     
-    
+    [self.cityTextField resignFirstResponder];
+    [self.CountryTextField resignFirstResponder];
     [self getWeatherInfo:urlStr];
     
     
@@ -110,6 +120,7 @@
     
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!error) {
+            NSLog(@"??????????????%@",error.localizedDescription);
             
             NSHTTPURLResponse *httpResp = (NSHTTPURLResponse *) response;
             
@@ -117,8 +128,6 @@
                 NSError *convertError;
                 
                 NSDictionary *dataDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&convertError];
-                
-                
                 
                 if (!convertError) {
                     //NSLog(@"dataDict:%@",dataDict);
@@ -156,6 +165,8 @@
                 
             }
         }else{
+            
+            NSLog(@"Error===================:%@",error.localizedDescription);
             [self alertNow];
         }
     }];

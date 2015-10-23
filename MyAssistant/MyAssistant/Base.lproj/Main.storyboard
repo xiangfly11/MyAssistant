@@ -565,7 +565,7 @@
         <!--Weather-->
         <scene sceneID="pA1-yy-yCc">
             <objects>
-                <viewController id="cXe-46-Hcm" customClass="ForcastViewController" sceneMemberID="viewController">
+                <viewController id="cXe-46-Hcm" customClass="WeatherViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3eh-dS-UYA"/>
                         <viewControllerLayoutGuide type="bottom" id="exo-Tw-lP5"/>
@@ -645,11 +645,11 @@
                         <barButtonItem key="leftBarButtonItem" image="menu" id="nVD-JX-J5q"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="addressLabel" destination="en2-rs-RfV" id="MjO-Bv-Ykq"/>
-                        <outlet property="descriptionLabel" destination="Vht-s0-WgB" id="5aa-8Z-miN"/>
-                        <outlet property="infoButton" destination="F23-AY-mmp" id="kWj-ca-QDz"/>
-                        <outlet property="slideMenuButton" destination="nVD-JX-J5q" id="Hck-Pw-tdX"/>
-                        <outlet property="tempLabel" destination="sri-z7-mv6" id="Jsu-VF-tek"/>
+                        <outlet property="addressLabel" destination="en2-rs-RfV" id="okG-6i-Eqe"/>
+                        <outlet property="descriptionLabel" destination="Vht-s0-WgB" id="YnW-B3-LXQ"/>
+                        <outlet property="infoButton" destination="F23-AY-mmp" id="CdL-Ny-0aD"/>
+                        <outlet property="slideMenuButton" destination="nVD-JX-J5q" id="6fx-Pi-2Df"/>
+                        <outlet property="tempLabel" destination="sri-z7-mv6" id="qsR-JT-aHL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qe-RX-Csc" userLabel="First Responder" sceneMemberID="firstResponder"/>

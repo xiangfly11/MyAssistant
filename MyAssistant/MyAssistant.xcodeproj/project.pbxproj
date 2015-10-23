@@ -36,7 +36,7 @@
 		708D61261B989CA000570160 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 708D61251B989CA000570160 /* Podfile */; };
 		70B19DB51B978965009B9692 /* MainViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B19DB41B978965009B9692 /* MainViewCell.m */; };
 		7A12C15A1BBC452A0017C758 /* city_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C1591BBC452A0017C758 /* city_list.txt */; settings = {ASSET_TAGS = (); }; };
-		7A4684461BD9826300F2E630 /* ForcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4684451BD9826300F2E630 /* ForcastViewController.m */; settings = {ASSET_TAGS = (); }; };
+		7A4684491BD9D18F00F2E630 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4684481BD9D18F00F2E630 /* WeatherViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7A8BE84E1BD7224700D65C40 /* RouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84D1BD7224700D65C40 /* RouteViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -105,8 +105,8 @@
 		70B19DB41B978965009B9692 /* MainViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewCell.m; sourceTree = "<group>"; };
 		70CD6A431AF79857F5550714 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7A12C1591BBC452A0017C758 /* city_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = city_list.txt; sourceTree = "<group>"; };
-		7A4684441BD9826300F2E630 /* ForcastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForcastViewController.h; path = ../../../MyAssistantInGitHub/MyAssistant/MyAssistant/ForcastViewController.h; sourceTree = "<group>"; };
-		7A4684451BD9826300F2E630 /* ForcastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForcastViewController.m; path = ../../../MyAssistantInGitHub/MyAssistant/MyAssistant/ForcastViewController.m; sourceTree = "<group>"; };
+		7A4684471BD9D18F00F2E630 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
+		7A4684481BD9D18F00F2E630 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		7A8BE8491BD6EE0F00D65C40 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		7A8BE84C1BD7224700D65C40 /* RouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteViewController.h; sourceTree = "<group>"; };
@@ -216,8 +216,6 @@
 		2EF21A6E1B9017D4008FD30A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				7A4684441BD9826300F2E630 /* ForcastViewController.h */,
-				7A4684451BD9826300F2E630 /* ForcastViewController.m */,
 				2E4CD4EF1B88186200578925 /* MainViewController.h */,
 				2E4CD4F01B88186200578925 /* MainViewController.m */,
 				2EA6C3AB1B8AAF48002B549F /* NotesViewController.h */,
@@ -238,6 +236,8 @@
 				7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */,
 				7A8BE84C1BD7224700D65C40 /* RouteViewController.h */,
 				7A8BE84D1BD7224700D65C40 /* RouteViewController.m */,
+				7A4684471BD9D18F00F2E630 /* WeatherViewController.h */,
+				7A4684481BD9D18F00F2E630 /* WeatherViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -453,13 +453,13 @@
 				70B19DB51B978965009B9692 /* MainViewCell.m in Sources */,
 				2E2156111B94E6D000012F02 /* SlideMenuViewController.m in Sources */,
 				2EBF11891B964B15000EB632 /* NewsConnection.m in Sources */,
+				7A4684491BD9D18F00F2E630 /* WeatherViewController.m in Sources */,
 				2E4CD4EA1B8816D400578925 /* SWRevealViewController.m in Sources */,
 				2EF21A841B90F67F008FD30A /* SlideMenuCell.m in Sources */,
 				707558FB1B9C01FE001C8B0B /* NewsDetailViewController.m in Sources */,
 				2E98EFC41B898A8E00F7E923 /* SlideMenuItems.m in Sources */,
 				2E4CD4F11B88186200578925 /* MainViewController.m in Sources */,
 				2EA6C3AD1B8AAF48002B549F /* NotesViewController.m in Sources */,
-				7A4684461BD9826300F2E630 /* ForcastViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

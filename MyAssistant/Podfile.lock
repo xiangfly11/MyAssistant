@@ -20,17 +20,20 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - DownPicker (0.1.34)
   - MBProgressHUD (0.9.1)
   - MJRefresh (2.4.7)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - DownPicker
   - MBProgressHUD (~> 0.9.1)
   - MJRefresh
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  DownPicker: c00ea63f08ae82116cc93d0eba74e86bf3d4c68e
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MJRefresh: 6eb2f61338f89f64fd628fd43debcf479381ff59
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

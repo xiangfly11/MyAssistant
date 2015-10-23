@@ -20,7 +20,6 @@
 		2E4CD4EA1B8816D400578925 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4CD4E91B8816D400578925 /* SWRevealViewController.m */; };
 		2E4CD4F11B88186200578925 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4CD4F01B88186200578925 /* MainViewController.m */; };
 		2E98EFC41B898A8E00F7E923 /* SlideMenuItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E98EFC31B898A8E00F7E923 /* SlideMenuItems.m */; };
-		2EA6C3A71B8AAEF5002B549F /* ForcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6C3A61B8AAEF5002B549F /* ForcastViewController.m */; };
 		2EA6C3AD1B8AAF48002B549F /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6C3AC1B8AAF48002B549F /* NotesViewController.m */; };
 		2EBF11891B964B15000EB632 /* NewsConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF11881B964B15000EB632 /* NewsConnection.m */; };
 		2EBF118C1B964B2C000EB632 /* NewsManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF118B1B964B2C000EB632 /* NewsManage.m */; };
@@ -37,6 +36,7 @@
 		708D61261B989CA000570160 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 708D61251B989CA000570160 /* Podfile */; };
 		70B19DB51B978965009B9692 /* MainViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B19DB41B978965009B9692 /* MainViewCell.m */; };
 		7A12C15A1BBC452A0017C758 /* city_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C1591BBC452A0017C758 /* city_list.txt */; settings = {ASSET_TAGS = (); }; };
+		7A4684461BD9826300F2E630 /* ForcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4684451BD9826300F2E630 /* ForcastViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7A8BE84E1BD7224700D65C40 /* RouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84D1BD7224700D65C40 /* RouteViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -73,8 +73,6 @@
 		2E4CD4F01B88186200578925 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		2E98EFC21B898A8E00F7E923 /* SlideMenuItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideMenuItems.h; sourceTree = "<group>"; };
 		2E98EFC31B898A8E00F7E923 /* SlideMenuItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuItems.m; sourceTree = "<group>"; };
-		2EA6C3A51B8AAEF5002B549F /* ForcastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForcastViewController.h; sourceTree = "<group>"; };
-		2EA6C3A61B8AAEF5002B549F /* ForcastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForcastViewController.m; sourceTree = "<group>"; };
 		2EA6C3AB1B8AAF48002B549F /* NotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
 		2EA6C3AC1B8AAF48002B549F /* NotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
 		2EBF11851B9648CE000EB632 /* NewsConnectionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsConnectionDelegate.h; sourceTree = "<group>"; };
@@ -107,6 +105,8 @@
 		70B19DB41B978965009B9692 /* MainViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewCell.m; sourceTree = "<group>"; };
 		70CD6A431AF79857F5550714 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7A12C1591BBC452A0017C758 /* city_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = city_list.txt; sourceTree = "<group>"; };
+		7A4684441BD9826300F2E630 /* ForcastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForcastViewController.h; path = ../../../MyAssistantInGitHub/MyAssistant/MyAssistant/ForcastViewController.h; sourceTree = "<group>"; };
+		7A4684451BD9826300F2E630 /* ForcastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForcastViewController.m; path = ../../../MyAssistantInGitHub/MyAssistant/MyAssistant/ForcastViewController.m; sourceTree = "<group>"; };
 		7A8BE8491BD6EE0F00D65C40 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		7A8BE84C1BD7224700D65C40 /* RouteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteViewController.h; sourceTree = "<group>"; };
@@ -216,10 +216,10 @@
 		2EF21A6E1B9017D4008FD30A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7A4684441BD9826300F2E630 /* ForcastViewController.h */,
+				7A4684451BD9826300F2E630 /* ForcastViewController.m */,
 				2E4CD4EF1B88186200578925 /* MainViewController.h */,
 				2E4CD4F01B88186200578925 /* MainViewController.m */,
-				2EA6C3A51B8AAEF5002B549F /* ForcastViewController.h */,
-				2EA6C3A61B8AAEF5002B549F /* ForcastViewController.m */,
 				2EA6C3AB1B8AAF48002B549F /* NotesViewController.h */,
 				2EA6C3AC1B8AAF48002B549F /* NotesViewController.m */,
 				2EF21A821B90F67F008FD30A /* SlideMenuCell.h */,
@@ -296,6 +296,7 @@
 				2E4CD4BC1B88161A00578925 /* Frameworks */,
 				2E4CD4BD1B88161A00578925 /* Resources */,
 				2DE1F71B8589C758A87F6B4A /* Copy Pods Resources */,
+				A00D8BD6F09DF76F44DD00CC /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -415,6 +416,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		A00D8BD6F09DF76F44DD00CC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -431,7 +447,6 @@
 				2EF21A721B901897008FD30A /* NewsEntry.m in Sources */,
 				7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */,
 				2E4CD4C51B88161A00578925 /* main.m in Sources */,
-				2EA6C3A71B8AAEF5002B549F /* ForcastViewController.m in Sources */,
 				2EBF118C1B964B2C000EB632 /* NewsManage.m in Sources */,
 				700BB3A61B9FD8E600C95757 /* MainViewCellWithoutImage.m in Sources */,
 				705074621B9DDE5700F07C9C /* EditNotesViewController.m in Sources */,
@@ -444,6 +459,7 @@
 				2E98EFC41B898A8E00F7E923 /* SlideMenuItems.m in Sources */,
 				2E4CD4F11B88186200578925 /* MainViewController.m in Sources */,
 				2EA6C3AD1B8AAF48002B549F /* NotesViewController.m in Sources */,
+				7A4684461BD9826300F2E630 /* ForcastViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FC30ACACC0B70C79B2A74B9C'
-               BlueprintName = 'AFNetworking'
+               BlueprintIdentifier = '0DB659C5EEDCE99EAC8ECC5C'
+               BlueprintName = 'DownPicker-DownPicker'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libAFNetworking.a'>
+               BuildableName = 'DownPicker.bundle'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

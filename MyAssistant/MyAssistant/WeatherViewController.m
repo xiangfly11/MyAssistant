@@ -8,18 +8,24 @@
 
 #import "WeatherViewController.h"
 #import "SWRevealViewController.h"
-#import <MapKit/MapKit.h>
 
-@interface WeatherViewController ()<CLLocationManagerDelegate>
+#import "CoreDataStack.h"
+#import "LocationEntity.h"
 
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+
+@interface WeatherViewController ()@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (strong,nonatomic) CLLocationManager *locationManager;
+@property (strong,nonatomic) NSString *urlStr;
+@property (strong,nonatomic) NSURL *url;
+
 
 @property (strong,nonatomic) CLLocation *currentLocation;
+
+@property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -39,9 +45,16 @@
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
+    self.urlStr = [[NSString alloc] init];
+    self.url = [[NSURL alloc] init];
+    
+    self.tableView.delegate = self;
+    
+    [self.tableView setDataSource:self];
     
     [self configureLocationManager];
-
+    
+    [self.fetchedResultsController performFetch:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,22 +103,24 @@
 
 -(void) getWeatherInfoWithCity:(NSString *) cityName andCountry:(NSString *) country boolCurrentLocation:(BOOL) isCurrentLocation {
     
-    NSString *urlStr;
+    //NSString *urlStr = [[NSString alloc] init];
     if(isCurrentLocation == YES){
-        urlStr= [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",cityName];
+        self.urlStr= [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",cityName];
     }else {
-        urlStr = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",cityName,country];
+        self.urlStr = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",cityName];
+        //self.urlStr = @"http://api.openweathermap.org/data/2.5/weather?q=london&appid=e40fd6f9191b29b575b0f77a9ce44bf6";
     }
     
     
-    NSURL *url = [NSURL URLWithString:urlStr];
+    //NSURL *url = [[NSURL alloc] init];
+    self.url = [NSURL URLWithString:[self.urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
     
     
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:self.url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *)response;
         
         if (!error && urlResponse.statusCode == 200) {
@@ -160,6 +175,194 @@
     
 }
 
+-(NSFetchedResultsController *)fetchedResultsController {
+    
+    if (_fetchedResultsController != nil) {
+        return  _fetchedResultsController;
+    }
+    
+    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
+    
+    NSFetchRequest *fetchRequest = [self entryListFetchRequest];
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"cityName" cacheName:nil];
+    
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}
+
+
+-(NSFetchRequest *) entryListFetchRequest {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"LocationEntity"];
+    
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:NO]];
+    
+    return fetchRequest;
+}
+
+
+
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections] [section];
+    
+    return [sectionInfo name];
+}
+
+-(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    LocationEntity *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
+    
+    [[coreDataStack managedObjectContext] deleteObject:entry];
+    
+    [coreDataStack saveContext];
+}
+
+
+-(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    
+    [self.tableView beginUpdates];
+}
+
+
+
+
+
+-(void) controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+
+-(void) controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        default:
+            break;
+    }
+    
+}
+
+
+-(void) controllerDidChangeContent: (NSFetchedResultsController *) controller {
+    
+    //NSLog(@"controllerDidChangeContent===============");
+    [self.tableView endUpdates];
+}
+
+
+
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    // Return the number of sections.
+    
+    NSLog(@"numberOfSectionsInTableView:%ld",self.fetchedResultsController.sections.count);
+    return self.fetchedResultsController.sections.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    // Return the number of rows in the section.
+    
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections] [section];
+    
+    
+    NSLog(@"tableView,numberOfRowInSection:%ld",[sectionInfo numberOfObjects]);
+
+    return [sectionInfo numberOfObjects];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSLog(@"tableView,cellForRowAtIndexPath");
+    static NSString *identifier = @"cityNameCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    
+    
+    
+    
+    // Configure the cell...
+    
+    LocationEntity *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    
+    
+    
+    //cell.textLabel.text = entry.body;
+    
+    //[cell configureCellForEntry: entry];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@,%@",entry.cityName,entry.countryCode];
+    
+    
+    NSLog(@"cell:%@,%@",entry.cityName,entry.countryCode);
+    
+    return cell;
+}
+
+
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    LocationEntity *entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSString *cityName = [entity.cityName lowercaseString];
+    NSString *countryCode = [entity.countryCode lowercaseString];
+    
+    [self getWeatherInfoWithCity:cityName andCountry:countryCode boolCurrentLocation:NO];
+    
+    
+    
+}
+
+
+
+//- (IBAction)addWasPressed:(id)sender {
+//    
+//    [self performSegueWithIdentifier:@"addLocation" sender:self];
+//}
 
 
 /*

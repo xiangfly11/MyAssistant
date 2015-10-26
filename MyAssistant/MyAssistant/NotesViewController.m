@@ -9,12 +9,12 @@
 #import "NotesViewController.h"
 #import "SWRevealViewController.h"
 #import <CoreData/CoreData.h>
-#import "NotesCoreDataStack.h"
+#import "CoreDataStack.h"
 #import "NewNotesEntity.h"
 
 @interface NotesViewController () <UITableViewDataSource,UITableViewDelegate,NSFetchedResultsControllerDelegate>
 
-@property (strong,nonatomic) NSFetchedResultsController *fetchedRequestController;
+@property (strong,nonatomic) NSFetchedResultsController *fetchedResultController;
 
 
 @end
@@ -37,7 +37,7 @@
     }
     
     
-    [self.fetchedRequestController performFetch:nil];
+    [self.fetchedResultController performFetch:nil];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
 }
@@ -75,36 +75,36 @@
 
 
 
--(NSFetchedResultsController *) fetchedRequestController {
+-(NSFetchedResultsController *) fetchedResultController {
     
     //Lazy loading technique - wait till the last minute when this property is accessed only create one if it is not nil
     
     NSLog(@"fetchRequestController");
     
-    if (_fetchedRequestController != nil) {
-        return  _fetchedRequestController;
+    if (_fetchedResultController != nil) {
+        return  _fetchedResultController;
     }
     
     
-    NotesCoreDataStack *coreDataStack = [NotesCoreDataStack defaultStack];
+    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
     
     NSFetchRequest *fetchRequest = [self entryListFetchRequest];
     
     
     //Passing the sectionName property of diaryEntrty in the sectionNameKeyPath argument
     
-    _fetchedRequestController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"sectionName" cacheName:nil];
+    _fetchedResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"sectionName" cacheName:nil];
     
-    _fetchedRequestController.delegate = self;
+    _fetchedResultController.delegate = self;
     
-    return _fetchedRequestController;
+    return _fetchedResultController;
 }
 
 
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedRequestController sections] [section];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultController sections] [section];
     
     return [sectionInfo name];
 }
@@ -116,9 +116,9 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NewNotesEntity *entry = [self.fetchedRequestController objectAtIndexPath:indexPath];
+    NewNotesEntity *entry = [self.fetchedResultController objectAtIndexPath:indexPath];
     
-    NotesCoreDataStack *coreDataStack = [NotesCoreDataStack defaultStack];
+    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
     
     [[coreDataStack managedObjectContext] deleteObject:entry];
     
@@ -188,7 +188,7 @@
     // Return the number of sections.
     
     NSLog(@"numberOfSectionsInTableView");
-    return self.fetchedRequestController.sections.count;
+    return self.fetchedResultController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -196,7 +196,7 @@
     // Return the number of rows in the section.
     NSLog(@"tableView,numberOfRowInSection");
     
-    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedRequestController sections] [section];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultController sections] [section];
     
     
     
@@ -219,7 +219,7 @@
     
     // Configure the cell...
     
-    NewNotesEntity *entry = [self.fetchedRequestController objectAtIndexPath:indexPath];
+    NewNotesEntity *entry = [self.fetchedResultController objectAtIndexPath:indexPath];
     
     
     

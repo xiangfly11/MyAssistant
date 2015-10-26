@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import <CoreData/CoreData.h>
 
-@interface WeatherViewController : UIViewController
+@interface WeatherViewController : UIViewController <CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,NSFetchedResultsControllerDelegate>
+
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *slideMenuButton;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

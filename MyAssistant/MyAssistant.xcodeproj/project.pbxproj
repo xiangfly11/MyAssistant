@@ -25,11 +25,13 @@
 		2EBF118C1B964B2C000EB632 /* NewsManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF118B1B964B2C000EB632 /* NewsManage.m */; };
 		2EF21A721B901897008FD30A /* NewsEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF21A711B901897008FD30A /* NewsEntry.m */; };
 		2EF21A751B901A48008FD30A /* NewsEntryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF21A741B901A48008FD30A /* NewsEntryBuilder.m */; };
-		2EF21A7E1B90D41E008FD30A /* NotesCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF21A7D1B90D41E008FD30A /* NotesCoreDataStack.m */; };
+		2EF21A7E1B90D41E008FD30A /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF21A7D1B90D41E008FD30A /* CoreDataStack.m */; };
 		2EF21A841B90F67F008FD30A /* SlideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF21A831B90F67F008FD30A /* SlideMenuCell.m */; };
 		700BB3A61B9FD8E600C95757 /* MainViewCellWithoutImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 700BB3A51B9FD8E600C95757 /* MainViewCellWithoutImage.m */; };
 		70267F8A1BA138EF00CE5655 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70267F891BA138EF00CE5655 /* CoreLocation.framework */; };
 		70267F8C1BA1390500CE5655 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70267F8B1BA1390500CE5655 /* MapKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		7044889C1BDC625300607A9B /* LocationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7044889B1BDC625300607A9B /* LocationEntity.m */; settings = {ASSET_TAGS = (); }; };
+		7044889F1BDC63B100607A9B /* EditWeatherLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7044889E1BDC63B100607A9B /* EditWeatherLocationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		705074621B9DDE5700F07C9C /* EditNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 705074611B9DDE5700F07C9C /* EditNotesViewController.m */; };
 		705204C21B9FF32400972E62 /* NewNotesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 705204C11B9FF32400972E62 /* NewNotesEntity.m */; };
 		707558FB1B9C01FE001C8B0B /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 707558FA1B9C01FE001C8B0B /* NewsDetailViewController.m */; };
@@ -85,8 +87,8 @@
 		2EF21A711B901897008FD30A /* NewsEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntry.m; sourceTree = "<group>"; };
 		2EF21A731B901A48008FD30A /* NewsEntryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsEntryBuilder.h; sourceTree = "<group>"; };
 		2EF21A741B901A48008FD30A /* NewsEntryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntryBuilder.m; sourceTree = "<group>"; };
-		2EF21A7C1B90D41E008FD30A /* NotesCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesCoreDataStack.h; sourceTree = "<group>"; };
-		2EF21A7D1B90D41E008FD30A /* NotesCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesCoreDataStack.m; sourceTree = "<group>"; };
+		2EF21A7C1B90D41E008FD30A /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
+		2EF21A7D1B90D41E008FD30A /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
 		2EF21A821B90F67F008FD30A /* SlideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideMenuCell.h; sourceTree = "<group>"; };
 		2EF21A831B90F67F008FD30A /* SlideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuCell.m; sourceTree = "<group>"; };
 		700BB3A41B9FD8E600C95757 /* MainViewCellWithoutImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewCellWithoutImage.h; sourceTree = "<group>"; };
@@ -94,6 +96,11 @@
 		7025906C1B9D3BAA00C006FE /* MyAssistant-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyAssistant-Prefix.pch"; sourceTree = "<group>"; };
 		70267F891BA138EF00CE5655 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		70267F8B1BA1390500CE5655 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		704488961BDC5C4C00607A9B /* CoreData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CoreData 2.xcdatamodel"; sourceTree = "<group>"; };
+		7044889A1BDC625300607A9B /* LocationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationEntity.h; sourceTree = "<group>"; };
+		7044889B1BDC625300607A9B /* LocationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationEntity.m; sourceTree = "<group>"; };
+		7044889D1BDC63B100607A9B /* EditWeatherLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWeatherLocationViewController.h; sourceTree = "<group>"; };
+		7044889E1BDC63B100607A9B /* EditWeatherLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditWeatherLocationViewController.m; sourceTree = "<group>"; };
 		705074601B9DDE5700F07C9C /* EditNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNotesViewController.h; sourceTree = "<group>"; };
 		705074611B9DDE5700F07C9C /* EditNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNotesViewController.m; sourceTree = "<group>"; };
 		705204C01B9FF32400972E62 /* NewNotesEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewNotesEntity.h; sourceTree = "<group>"; };
@@ -238,6 +245,8 @@
 				7A8BE84D1BD7224700D65C40 /* RouteViewController.m */,
 				7A4684471BD9D18F00F2E630 /* WeatherViewController.h */,
 				7A4684481BD9D18F00F2E630 /* WeatherViewController.m */,
+				7044889D1BDC63B100607A9B /* EditWeatherLocationViewController.h */,
+				7044889E1BDC63B100607A9B /* EditWeatherLocationViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -249,10 +258,12 @@
 				705204C11B9FF32400972E62 /* NewNotesEntity.m */,
 				2EF21A701B901897008FD30A /* NewsEntry.h */,
 				2EF21A711B901897008FD30A /* NewsEntry.m */,
+				7044889A1BDC625300607A9B /* LocationEntity.h */,
+				7044889B1BDC625300607A9B /* LocationEntity.m */,
 				2EF21A731B901A48008FD30A /* NewsEntryBuilder.h */,
 				2EF21A741B901A48008FD30A /* NewsEntryBuilder.m */,
-				2EF21A7C1B90D41E008FD30A /* NotesCoreDataStack.h */,
-				2EF21A7D1B90D41E008FD30A /* NotesCoreDataStack.m */,
+				2EF21A7C1B90D41E008FD30A /* CoreDataStack.h */,
+				2EF21A7D1B90D41E008FD30A /* CoreDataStack.m */,
 				2E98EFC21B898A8E00F7E923 /* SlideMenuItems.h */,
 				2E98EFC31B898A8E00F7E923 /* SlideMenuItems.m */,
 				2EBF11851B9648CE000EB632 /* NewsConnectionDelegate.h */,
@@ -443,10 +454,11 @@
 				2EF21A751B901A48008FD30A /* NewsEntryBuilder.m in Sources */,
 				2E428EFC1B8F97E300048715 /* CoreData.xcdatamodeld in Sources */,
 				7A8BE84E1BD7224700D65C40 /* RouteViewController.m in Sources */,
-				2EF21A7E1B90D41E008FD30A /* NotesCoreDataStack.m in Sources */,
+				2EF21A7E1B90D41E008FD30A /* CoreDataStack.m in Sources */,
 				2EF21A721B901897008FD30A /* NewsEntry.m in Sources */,
 				7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */,
 				2E4CD4C51B88161A00578925 /* main.m in Sources */,
+				7044889C1BDC625300607A9B /* LocationEntity.m in Sources */,
 				2EBF118C1B964B2C000EB632 /* NewsManage.m in Sources */,
 				700BB3A61B9FD8E600C95757 /* MainViewCellWithoutImage.m in Sources */,
 				705074621B9DDE5700F07C9C /* EditNotesViewController.m in Sources */,
@@ -457,6 +469,7 @@
 				2E4CD4EA1B8816D400578925 /* SWRevealViewController.m in Sources */,
 				2EF21A841B90F67F008FD30A /* SlideMenuCell.m in Sources */,
 				707558FB1B9C01FE001C8B0B /* NewsDetailViewController.m in Sources */,
+				7044889F1BDC63B100607A9B /* EditWeatherLocationViewController.m in Sources */,
 				2E98EFC41B898A8E00F7E923 /* SlideMenuItems.m in Sources */,
 				2E4CD4F11B88186200578925 /* MainViewController.m in Sources */,
 				2EA6C3AD1B8AAF48002B549F /* NotesViewController.m in Sources */,
@@ -684,9 +697,10 @@
 		2E428EFA1B8F97E300048715 /* CoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				704488961BDC5C4C00607A9B /* CoreData 2.xcdatamodel */,
 				2E428EFB1B8F97E300048715 /* CoreData.xcdatamodel */,
 			);
-			currentVersion = 2E428EFB1B8F97E300048715 /* CoreData.xcdatamodel */;
+			currentVersion = 704488961BDC5C4C00607A9B /* CoreData 2.xcdatamodel */;
 			path = CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

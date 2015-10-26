@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 Jiaxiang Li. All rights reserved.
 //
 
-#import "NotesCoreDataStack.h"
+#import "CoreDataStack.h"
 
-@implementation NotesCoreDataStack
+@implementation CoreDataStack
 
 
 #pragma mark - Core Data Stack
@@ -19,7 +19,7 @@
 
 
 +(instancetype) defaultStack {
-    static NotesCoreDataStack *coreDataStack;
+    static CoreDataStack *coreDataStack;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -67,13 +67,16 @@
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES};
+    
+    
     NSURL *storeUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CurrentMyAssistant.sqlite"];
     
     NSError *error = nil;
     
     NSString *failedReason = @"There is a error";
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
         
         NSMutableDictionary *dict = [NSMutableDictionary    dictionary];
         

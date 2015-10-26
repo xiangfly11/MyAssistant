@@ -7,7 +7,7 @@
 //
 
 #import "EditNotesViewController.h"
-#import "NotesCoreDataStack.h"
+#import "CoreDataStack.h"
 //#import "NotesEntry.h"
 
 @interface EditNotesViewController ()
@@ -93,7 +93,7 @@
 
 -(void) insertInputEntry {
     
-    NotesCoreDataStack *coreDataStack = [NotesCoreDataStack defaultStack];
+    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
     
     NewNotesEntity *entry = [NSEntityDescription insertNewObjectForEntityForName:@"NewNotesEntity" inManagedObjectContext:coreDataStack.managedObjectContext];
     
@@ -116,7 +116,7 @@
 
 -(void) updateInputEntry {
     self.entry.body = self.textView.text;
-    NotesCoreDataStack *coreDataStack = [NotesCoreDataStack defaultStack];
+    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
     
     [coreDataStack saveContext];
     

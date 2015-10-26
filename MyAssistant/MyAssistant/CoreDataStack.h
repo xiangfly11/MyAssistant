@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@interface NotesCoreDataStack : NSObject
+@interface CoreDataStack : NSObject
 
 
 @property (readonly,strong,nonatomic) NSManagedObjectContext *managedObjectContext;

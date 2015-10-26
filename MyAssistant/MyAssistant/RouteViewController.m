@@ -112,6 +112,40 @@
     
     
 }
+- (IBAction)navigationWasPressed:(id)sender {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Navigation Optios" message:@"You can select navigation apps from below list." preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *actionOne = [UIAlertAction actionWithTitle:@"Apple Map" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.endMapItem openInMapsWithLaunchOptions:nil];
+    }];
+    
+    
+    UIAlertAction *actionTwo = [UIAlertAction actionWithTitle:@"Google Map" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *urlStr = [[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f",self.endMapItem.placemark.coordinate.latitude,self.endMapItem.placemark.coordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        NSURL *url = [NSURL URLWithString:urlStr];
+        
+        if (![[UIApplication sharedApplication] canOpenURL:url]) {
+            UIAlertController *errorController = [UIAlertController alertControllerWithTitle:@"Navigation Error" message:@"Your selection cannot be use,please press OK." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+            
+            [errorController addAction: alertAction];
+            
+            [self presentViewController:errorController animated:YES completion:nil];
+        }else {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    }];
+    
+    [alertController addAction:actionOne];
+    [alertController addAction:actionTwo];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
 
 /*
 #pragma mark - Navigation

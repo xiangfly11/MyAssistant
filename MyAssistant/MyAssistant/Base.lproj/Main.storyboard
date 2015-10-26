@@ -699,12 +699,26 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <animations/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKI-fT-hod">
+                                <rect key="frame" x="18" y="522" width="75" height="32"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="3PX-FK-ayB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="navigation"/>
+                                <connections>
+                                    <action selector="navigationWasPressed:" destination="dhe-0T-5y2" eventType="touchUpInside" id="0wb-HF-iE3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="YKI-fT-hod" firstAttribute="leading" secondItem="On4-7S-3fP" secondAttribute="leading" constant="18" id="9IK-1z-Dfs"/>
                             <constraint firstItem="x16-Uw-xKL" firstAttribute="top" secondItem="nC7-fS-8VN" secondAttribute="bottom" id="9xV-BL-r9L"/>
                             <constraint firstItem="nC7-fS-8VN" firstAttribute="top" secondItem="kQc-kp-OKf" secondAttribute="bottom" id="JlE-z8-cZt"/>
+                            <constraint firstItem="x16-Uw-xKL" firstAttribute="top" secondItem="YKI-fT-hod" secondAttribute="bottom" constant="14" id="fiu-M9-fsu"/>
                             <constraint firstAttribute="trailing" secondItem="nC7-fS-8VN" secondAttribute="trailing" id="kVa-9W-EUc"/>
                             <constraint firstItem="nC7-fS-8VN" firstAttribute="leading" secondItem="On4-7S-3fP" secondAttribute="leading" id="vLl-43-Ug7"/>
                         </constraints>

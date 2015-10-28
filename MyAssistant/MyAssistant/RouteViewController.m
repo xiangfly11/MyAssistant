@@ -24,7 +24,7 @@
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.startMapItem.placemark.coordinate, 5000, 5000);
     self.mapView.showsUserLocation = YES;
-    [self.mapView setRegion:region];
+    [self.mapView setRegion:region animated:YES];
     
     self.mapView.delegate = self;
     
@@ -116,12 +116,12 @@
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Navigation Optios" message:@"You can select navigation apps from below list." preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *actionOne = [UIAlertAction actionWithTitle:@"Apple Map" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *appleAction = [UIAlertAction actionWithTitle:@"Apple Map" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.endMapItem openInMapsWithLaunchOptions:nil];
     }];
     
     
-    UIAlertAction *actionTwo = [UIAlertAction actionWithTitle:@"Google Map" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *googleAction = [UIAlertAction actionWithTitle:@"Google Map" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSString *urlStr = [[NSString stringWithFormat:@"comgooglemaps://?center=%f,%f",self.endMapItem.placemark.coordinate.latitude,self.endMapItem.placemark.coordinate.longitude] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         
@@ -140,8 +140,11 @@
         }
     }];
     
-    [alertController addAction:actionOne];
-    [alertController addAction:actionTwo];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:appleAction];
+    [alertController addAction:googleAction];
+    [alertController addAction:cancelAction];
     
     [self presentViewController:alertController animated:YES completion:nil];
     

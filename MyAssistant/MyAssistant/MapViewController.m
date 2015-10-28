@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "RouteViewController.h"
 #import "AnnotationButton.h"
+#import "LocationDetailViewController.h"
 
 @interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate> {
     
@@ -63,6 +64,8 @@
     
     [self configueCLLocationManager];
     
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     self.mapView.showsUserLocation = YES;
 }
 
@@ -93,9 +96,9 @@
     self.currentLocation = [locations lastObject];
     
    
-    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.currentLocation.coordinate, 5000, 5000)];
+    //[self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.currentLocation.coordinate, 5000, 5000)];
     
-    
+    [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.currentLocation.coordinate, 5000, 5000) animated:YES];
     
 }
 
@@ -209,9 +212,6 @@
         }
         
         
-//        AnnotationButton *accessoryBtn = (AnnotationButton *) [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-//        accessoryBtn.tittle = annotation.title;
-//        [accessoryBtn addTarget:nil action:@selector(showMoreInfoInActionSheet:) forControlEvents:UIControlEventTouchUpInside];
         
     
     }
@@ -223,21 +223,25 @@
     
 }
 
-//-(void)fuck: (UIButton *)sender{
-//    NSLog(@"%@",sender.currentTitle);
-//}
 
 -(void) showMoreInfoInActionSheet:(UIButton *) sender {
+//    NSUInteger index = [annotationTitle indexOfObject:sender.currentTitle];
+//    CLPlacemark *placemark = [resultPlacemark objectAtIndex:index];
+//    UIAlertController *infoController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@",placemark.name] message:[NSString stringWithFormat:@"%@,%@",placemark.subThoroughfare,placemark.thoroughfare] preferredStyle:UIAlertControllerStyleActionSheet];
+//    
+//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];;
+//    [infoController addAction:action];
+//    
+//    [self presentViewController:infoController animated:YES completion:nil];
+    
     NSUInteger index = [annotationTitle indexOfObject:sender.currentTitle];
-    CLPlacemark *placemark = [resultPlacemark objectAtIndex:index];
-    UIAlertController *infoController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@",placemark.name] message:[NSString stringWithFormat:@"%@,%@",placemark.subThoroughfare,placemark.thoroughfare] preferredStyle:UIAlertControllerStyleActionSheet];
+    MKMapItem *item = [resultMapItem objectAtIndex:index];
     
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];;
-    [infoController addAction:action];
+    LocationDetailViewController *locationDetail = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationDetail"];
     
-    [self presentViewController:infoController animated:YES completion:nil];
+    locationDetail.mapItem = item;
     
-    
+    [self.navigationController showViewController:locationDetail sender:self];
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {

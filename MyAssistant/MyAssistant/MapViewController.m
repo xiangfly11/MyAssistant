@@ -11,6 +11,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "RouteViewController.h"
+#import "AnnotationButton.h"
 
 @interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate> {
     
@@ -18,7 +19,7 @@
     NSMutableArray *annotations;
     NSMutableArray *resultPlacemark;
     NSMutableArray *resultMapItem;
-    
+    NSMutableArray *annotationTitle;
     NSUInteger selectedRowIndex;
     
 }
@@ -54,7 +55,7 @@
     annotations = [[NSMutableArray alloc] init];
     resultPlacemark = [[NSMutableArray alloc] init];
     resultMapItem = [[NSMutableArray alloc] init];
-    
+    annotationTitle = [[NSMutableArray alloc] init];
     self.searchBar.delegate = self;
     self.mapView.delegate = self;
     self.tableView.delegate = self;
@@ -91,7 +92,7 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     self.currentLocation = [locations lastObject];
     
-    
+   
     [self.mapView setRegion:MKCoordinateRegionMakeWithDistance(self.currentLocation.coordinate, 5000, 5000)];
     
     
@@ -109,13 +110,20 @@
         [annotations removeAllObjects];
         [resultPlacemark removeAllObjects];
         [resultMapItem removeAllObjects];
+        [annotationTitle removeAllObjects];
     }
     [self performSearchWithInput:searchBarInput];
+    
     
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    
+    self.searchBar.text = @"";
+    searchBarInput = @"";
+    [annotations removeAllObjects];
+    [resultMapItem removeAllObjects];
+    [resultPlacemark removeAllObjects];
+    [annotationTitle removeAllObjects];
 }
 
 
@@ -146,16 +154,22 @@
             }
             
             for (MKMapItem *item in response.mapItems) {
-                MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-                MKPlacemark *placemark = item.placemark;
-                annotation.subtitle = [NSString stringWithFormat:@"%@ %@,%@,%@,%@",placemark.subThoroughfare,placemark.thoroughfare,placemark.locality,placemark.administrativeArea,placemark.postalCode];
-                annotation.title = placemark.name;
-                annotation.coordinate = placemark.coordinate;
                 
-                [annotations addObject:annotation];
-                [resultPlacemark addObject:placemark];
-                [resultMapItem addObject:item];
-                [self.mapView addAnnotation:annotation];
+                CLLocation *resultLocation = item.placemark.location;
+                if ([self.currentLocation distanceFromLocation:resultLocation] <= 5000) {
+                    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+                    MKPlacemark *placemark = item.placemark;
+                    annotation.subtitle = [NSString stringWithFormat:@"%@ %@,%@,%@,%@",placemark.subThoroughfare,placemark.thoroughfare,placemark.locality,placemark.administrativeArea,placemark.postalCode];
+                    annotation.title = placemark.name;
+                    annotation.coordinate = placemark.coordinate;
+                    
+                    [annotations addObject:annotation];
+                    [resultPlacemark addObject:placemark];
+                    [resultMapItem addObject:item];
+                    [annotationTitle addObject:annotation.title];
+                    [self.mapView addAnnotation:annotation];
+                }
+                
                 
             }
             
@@ -175,32 +189,68 @@
         return  nil;
     }
     
-    MKPinAnnotationView *pinAnnotationView = nil;
-    
+    static NSString *identifier = @"annotationView";
+    MKPinAnnotationView *pinAnnotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
-        static NSString *identifier = @"annotationView";
-        pinAnnotationView = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        
         
         if (!pinAnnotationView) {
             pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            pinAnnotationView.canShowCallout = YES;
+            pinAnnotationView.animatesDrop = YES;
+            
+            UIButton *rightBtn=[UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [rightBtn setTitle:[NSString stringWithFormat:@"%@",annotation.title] forState:UIControlStateNormal];
+            
+            [rightBtn addTarget:nil action:@selector(showMoreInfoInActionSheet:) forControlEvents:UIControlEventTouchUpInside];
+            
+            pinAnnotationView.rightCalloutAccessoryView = rightBtn;
+        
         }
         
-        pinAnnotationView.canShowCallout = YES;
-        pinAnnotationView.animatesDrop = YES;
-        pinAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+//        AnnotationButton *accessoryBtn = (AnnotationButton *) [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+//        accessoryBtn.tittle = annotation.title;
+//        [accessoryBtn addTarget:nil action:@selector(showMoreInfoInActionSheet:) forControlEvents:UIControlEventTouchUpInside];
+        
+    
     }
     
     [self.tableView reloadData];
+    
     
     return pinAnnotationView;
     
 }
 
+//-(void)fuck: (UIButton *)sender{
+//    NSLog(@"%@",sender.currentTitle);
+//}
+
+-(void) showMoreInfoInActionSheet:(UIButton *) sender {
+    NSUInteger index = [annotationTitle indexOfObject:sender.currentTitle];
+    CLPlacemark *placemark = [resultPlacemark objectAtIndex:index];
+    UIAlertController *infoController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@",placemark.name] message:[NSString stringWithFormat:@"%@,%@",placemark.subThoroughfare,placemark.thoroughfare] preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];;
+    [infoController addAction:action];
+    
+    [self presentViewController:infoController animated:YES completion:nil];
+    
+    
+}
+
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    NSLog(@"HELLO++++++++++++++++++++");
     MKAnnotationView *currentAnnotation = [mapView viewForAnnotation:userLocation];
     currentAnnotation.canShowCallout = YES;
 
 }
+
+//-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+//    [self.mapView setcen]
+//}
+
 
 #pragma mark - UITableViewDataSource Delegate & UITableView Delegate
 

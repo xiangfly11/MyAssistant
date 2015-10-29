@@ -30,13 +30,26 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) CLLocation *currentLocation;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *showListButton;
 
 @end
 
 @implementation MapViewController
 
--(void)viewWillAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated {
     
+    CGRect tableViewFrame = self.tableView.frame;
+    tableViewFrame.origin.y = self.view.bounds.size.height+100;
+    self.tableView.frame = tableViewFrame;
+    
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:0.5];
+//    [UIView setAnimationDelay:1.0];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    
+   
+    //[UIView commitAnimations];
 }
 
 - (void)viewDidLoad {
@@ -64,9 +77,11 @@
     
     [self configueCLLocationManager];
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.hidden = YES;
+    //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.mapView.showsUserLocation = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,12 +136,24 @@
 }
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.searchBar resignFirstResponder];
     self.searchBar.text = @"";
     searchBarInput = @"";
-    [annotations removeAllObjects];
-    [resultMapItem removeAllObjects];
-    [resultPlacemark removeAllObjects];
-    [annotationTitle removeAllObjects];
+    [self.mapView removeAnnotations:annotations];
+
+    CGRect tableViewFram = self.tableView.frame;
+    tableViewFram.origin.y= self.view.bounds.size.height+100;
+    [UIView animateWithDuration:4.0 delay:1.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.tableView.frame = tableViewFram;
+        self.tableView.hidden = YES;
+    } completion:^(BOOL finished) {
+        [annotations removeAllObjects];
+        [resultMapItem removeAllObjects];
+        [resultPlacemark removeAllObjects];
+        [annotationTitle removeAllObjects];
+    }];
+    
 }
 
 
@@ -216,7 +243,8 @@
     
     }
     
-    [self.tableView reloadData];
+    
+    
     
     
     return pinAnnotationView;
@@ -305,6 +333,20 @@
     routeViewController.startMapItem = [[MKMapItem alloc] initWithPlacemark:currentPlacemark];
     
     routeViewController.endMapItem = resultMapItem[selectedRowIndex];
+    
+}
+- (IBAction)showListWasPressed:(id)sender {
+    
+    CGRect tableViewFrame = self.tableView.frame;
+    tableViewFrame.origin.y = self.view.bounds.size.height-self.toolBar.frame.size.height-self.tableView.frame.size.height;
+    [UIView animateWithDuration:4.0 delay:1.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.tableView.frame = tableViewFrame;
+        self.tableView.hidden = NO;
+    } completion:^(BOOL finished) {
+        
+        [self.tableView reloadData];
+    }];
+
     
 }
 

@@ -620,24 +620,18 @@
                             <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxA-nq-tSt">
                                 <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gxA-nq-tSt" secondAttribute="height" multiplier="80:11" id="qld-ED-Rq9"/>
-                                </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="etd-UM-cDc">
-                                <rect key="frame" x="0.0" y="116" width="320" height="270"/>
+                                <rect key="frame" x="0.0" y="116" width="320" height="452"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="etd-UM-cDc" secondAttribute="height" multiplier="32:27" id="QfD-oK-Nj3"/>
-                                </constraints>
                             </mapView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="27" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="auf-WM-KYM">
-                                <rect key="frame" x="0.0" y="394" width="320" height="174"/>
+                            <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="27" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="auf-WM-KYM">
+                                <rect key="frame" x="0.0" y="350" width="320" height="174"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="auf-WM-KYM" secondAttribute="height" multiplier="160:87" id="IYh-W2-tMr"/>
+                                    <constraint firstAttribute="width" secondItem="auf-WM-KYM" secondAttribute="height" multiplier="160:87" id="Qlo-c1-jGP"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="27" id="YIN-w1-XPn">
@@ -652,20 +646,41 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hW-M8-llc">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7hW-M8-llc" secondAttribute="height" multiplier="80:11" id="2fe-5X-3Sr"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="flexibleSpace" id="YKB-li-EHP"/>
+                                    <barButtonItem title="Show List" id="Goe-Qa-78w">
+                                        <color key="tintColor" red="0.43899964079999998" green="0.80941989940000003" blue="0.61531968390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="showListWasPressed:" destination="oRP-AP-gbt" id="yHJ-2Q-S4C"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="TXw-RQ-tYU"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="gxA-nq-tSt" secondAttribute="trailing" id="BGa-8S-XBf"/>
-                            <constraint firstItem="auf-WM-KYM" firstAttribute="top" secondItem="etd-UM-cDc" secondAttribute="bottom" constant="8" id="FKl-FK-U9T"/>
-                            <constraint firstItem="etd-UM-cDc" firstAttribute="top" secondItem="gxA-nq-tSt" secondAttribute="bottom" id="Fay-1o-zGd"/>
-                            <constraint firstAttribute="trailing" secondItem="auf-WM-KYM" secondAttribute="trailing" id="JxB-CR-8bm"/>
-                            <constraint firstItem="gxA-nq-tSt" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="MJQ-7e-baU"/>
-                            <constraint firstAttribute="trailing" secondItem="etd-UM-cDc" secondAttribute="trailing" id="Q16-rt-OSF"/>
-                            <constraint firstItem="gxA-nq-tSt" firstAttribute="top" secondItem="bxY-hR-5Xj" secondAttribute="bottom" constant="8" id="XP0-eY-g4u"/>
-                            <constraint firstItem="etd-UM-cDc" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="eRF-sa-1qw"/>
-                            <constraint firstItem="bam-FD-xfe" firstAttribute="top" secondItem="auf-WM-KYM" secondAttribute="bottom" id="tNv-zO-YfQ"/>
-                            <constraint firstItem="auf-WM-KYM" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="z46-UV-Hsv"/>
+                            <constraint firstAttribute="trailing" secondItem="7hW-M8-llc" secondAttribute="trailing" id="1Ur-bf-o4Z"/>
+                            <constraint firstAttribute="trailing" secondItem="gxA-nq-tSt" secondAttribute="trailing" id="6LX-TT-ZXo"/>
+                            <constraint firstItem="gxA-nq-tSt" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="853-f6-p1g"/>
+                            <constraint firstItem="etd-UM-cDc" firstAttribute="top" secondItem="gxA-nq-tSt" secondAttribute="bottom" id="9ld-69-Jtq"/>
+                            <constraint firstItem="etd-UM-cDc" firstAttribute="top" secondItem="gxA-nq-tSt" secondAttribute="bottom" id="GRN-XL-kks"/>
+                            <constraint firstItem="7hW-M8-llc" firstAttribute="top" secondItem="auf-WM-KYM" secondAttribute="bottom" id="Hfs-Yr-5Hy"/>
+                            <constraint firstItem="7hW-M8-llc" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="VsV-nq-k8s"/>
+                            <constraint firstItem="gxA-nq-tSt" firstAttribute="top" secondItem="bxY-hR-5Xj" secondAttribute="bottom" constant="8" id="ZNB-Ym-MfN"/>
+                            <constraint firstItem="auf-WM-KYM" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="eJO-hY-FH9"/>
+                            <constraint firstItem="bam-FD-xfe" firstAttribute="top" secondItem="7hW-M8-llc" secondAttribute="bottom" id="fuv-sd-N2b"/>
+                            <constraint firstAttribute="trailing" secondItem="etd-UM-cDc" secondAttribute="trailing" id="jrg-be-Km8"/>
+                            <constraint firstItem="bam-FD-xfe" firstAttribute="top" secondItem="etd-UM-cDc" secondAttribute="bottom" id="kcn-Yb-AiC"/>
+                            <constraint firstAttribute="trailing" secondItem="auf-WM-KYM" secondAttribute="trailing" id="wRj-t1-cMM"/>
+                            <constraint firstItem="etd-UM-cDc" firstAttribute="leading" secondItem="rEr-FW-yhd" secondAttribute="leading" id="xxp-Gh-5J0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="KID-MK-tl5">
@@ -674,8 +689,10 @@
                     <connections>
                         <outlet property="mapView" destination="etd-UM-cDc" id="4bz-52-tbf"/>
                         <outlet property="searchBar" destination="gxA-nq-tSt" id="iVo-MV-mOQ"/>
+                        <outlet property="showListButton" destination="Goe-Qa-78w" id="44r-Zr-tCt"/>
                         <outlet property="slideMenuButton" destination="gtW-q3-LUW" id="eM2-Ti-15A"/>
                         <outlet property="tableView" destination="auf-WM-KYM" id="Oen-Dz-NUc"/>
+                        <outlet property="toolBar" destination="7hW-M8-llc" id="LRh-f5-ZLo"/>
                         <segue destination="dhe-0T-5y2" kind="push" identifier="goToRoute" id="I3A-nQ-58Z"/>
                         <segue destination="KUn-5D-TbG" kind="push" identifier="LocationDetail" id="1AB-9t-vXq"/>
                     </connections>

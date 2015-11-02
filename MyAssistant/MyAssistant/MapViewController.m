@@ -14,7 +14,7 @@
 #import "AnnotationButton.h"
 #import "LocationDetailViewController.h"
 
-@interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate> {
+@interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollisionBehaviorDelegate> {
     
     NSString *searchBarInput;
     NSMutableArray *annotations;
@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *slideMenuButton;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) CLLocation *currentLocation;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
@@ -37,19 +37,17 @@
 
 @implementation MapViewController
 
--(void)viewDidAppear:(BOOL)animated {
+
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     
     CGRect tableViewFrame = self.tableView.frame;
-    tableViewFrame.origin.y = self.view.bounds.size.height+100;
+    tableViewFrame.origin.y = self.view.bounds.size.height+self.tableView.bounds.size.height;
     self.tableView.frame = tableViewFrame;
     
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:0.5];
-//    [UIView setAnimationDelay:1.0];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-    
-   
-    //[UIView commitAnimations];
+
 }
 
 - (void)viewDidLoad {
@@ -66,6 +64,9 @@
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height-200, self.view.frame.size.width, 200.0f) style:UITableViewStylePlain];
+    
+    [self.view addSubview:self.tableView];
     annotations = [[NSMutableArray alloc] init];
     resultPlacemark = [[NSMutableArray alloc] init];
     resultMapItem = [[NSMutableArray alloc] init];
@@ -76,9 +77,6 @@
     self.tableView.dataSource = self;
     
     [self configueCLLocationManager];
-    
-    self.tableView.hidden = YES;
-    //self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.mapView.showsUserLocation = YES;
     
@@ -143,17 +141,21 @@
     [self.mapView removeAnnotations:annotations];
 
     CGRect tableViewFram = self.tableView.frame;
-    tableViewFram.origin.y= self.view.bounds.size.height+100;
-    [UIView animateWithDuration:4.0 delay:1.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.tableView.frame = tableViewFram;
-        self.tableView.hidden = YES;
-    } completion:^(BOOL finished) {
-        [annotations removeAllObjects];
-        [resultMapItem removeAllObjects];
-        [resultPlacemark removeAllObjects];
-        [annotationTitle removeAllObjects];
-    }];
+    tableViewFram.origin.y= self.view.bounds.size.height+self.tableView.bounds.size.height;
+
+        [UITableView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.tableView.frame = tableViewFram;
+            //self.tableView.hidden = YES;
+        } completion:^(BOOL finished) {
+            //self.tableView.hidden = YES;
+            [annotations removeAllObjects];
+            [resultMapItem removeAllObjects];
+            [resultPlacemark removeAllObjects];
+            [annotationTitle removeAllObjects];
+        }];
+  
     
+
 }
 
 
@@ -203,6 +205,8 @@
                 
             }
             
+           
+            
         }];
         
     }
@@ -242,10 +246,7 @@
         
     
     }
-    
-    
-    
-    
+
     
     return pinAnnotationView;
     
@@ -253,14 +254,7 @@
 
 
 -(void) showMoreInfoInActionSheet:(UIButton *) sender {
-//    NSUInteger index = [annotationTitle indexOfObject:sender.currentTitle];
-//    CLPlacemark *placemark = [resultPlacemark objectAtIndex:index];
-//    UIAlertController *infoController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@",placemark.name] message:[NSString stringWithFormat:@"%@,%@",placemark.subThoroughfare,placemark.thoroughfare] preferredStyle:UIAlertControllerStyleActionSheet];
-//    
-//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];;
-//    [infoController addAction:action];
-//    
-//    [self presentViewController:infoController animated:YES completion:nil];
+
     
     NSUInteger index = [annotationTitle indexOfObject:sender.currentTitle];
     MKMapItem *item = [resultMapItem objectAtIndex:index];
@@ -279,9 +273,7 @@
 
 }
 
-//-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-//    [self.mapView setcen]
-//}
+
 
 
 #pragma mark - UITableViewDataSource Delegate & UITableView Delegate
@@ -296,6 +288,7 @@
     }
     MKPlacemark *placemark = resultPlacemark[indexPath.row];
     cell.textLabel.text = placemark.name;
+    cell.contentView.alpha = 0.85;
     
     return cell;
     
@@ -339,14 +332,17 @@
     
     CGRect tableViewFrame = self.tableView.frame;
     tableViewFrame.origin.y = self.view.bounds.size.height-self.toolBar.frame.size.height-self.tableView.frame.size.height;
-    [UIView animateWithDuration:4.0 delay:1.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.tableView.frame = tableViewFrame;
-        self.tableView.hidden = NO;
-    } completion:^(BOOL finished) {
+    
+    
         
-        [self.tableView reloadData];
-    }];
-
+        [UITableView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            self.tableView.frame = tableViewFrame;
+            
+        } completion:^(BOOL finished) {
+            //self.tableView.hidden = NO;
+            [self.tableView reloadData];
+        }];
+    
     
 }
 

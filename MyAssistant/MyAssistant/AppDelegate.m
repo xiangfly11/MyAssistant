@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <TSMessages/TSMessage.h>
+#import "WeatherViewController.h"
 
 @interface AppDelegate ()
 
@@ -26,6 +28,9 @@
     navigationBarAppearance.tintColor = [UIColor whiteColor];
     
     navigationBarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
+    WeatherViewController *viewController = [[WeatherViewController alloc] init];
+    [TSMessage setDefaultViewController:viewController];
     
     return YES;
 }

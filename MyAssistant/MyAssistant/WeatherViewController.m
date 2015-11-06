@@ -261,15 +261,18 @@
 }
 
 -(void) passDailyForcastToViewController:(NSMutableArray *)arrayDaily {
+    
+    NSLog(@"arrayDaily Count:%lu",(unsigned long)arrayDaily.count);
     self.dailyArray = [[NSMutableArray alloc] initWithArray:arrayDaily];
     
-    NSLog(@"%lu",(unsigned long)self.dailyArray.count);
+    NSLog(@"??????????%lu",(unsigned long)self.dailyArray.count);
     [self.tableView reloadData];
     
 }
 
 
 -(void) passHourlyForcastToViewController:(NSMutableArray *)arrayHourly {
+    NSLog(@"arrayHourly Count:%lu",(unsigned long)arrayHourly.count);
     self.hourlyArray = [[NSMutableArray alloc] initWithArray:arrayHourly];
     [self.tableView reloadData];
 }

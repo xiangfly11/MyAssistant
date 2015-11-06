@@ -16,13 +16,15 @@
 @interface WeatherClient() {
     CLLocationCoordinate2D currentCoordinate;
     OWMWeatherAPI *weatherAPI;
+    NSMutableArray *arrayHourly;
+    NSMutableArray *arrayDaily;
 }
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) WeatherCondition  *currentCondition;
 @property (nonatomic,strong) WeatherManager *manager;
-@property (nonatomic,strong) NSMutableArray *arrayHourly;
-@property (nonatomic,strong) NSMutableArray *arrayDaily;
+//@property (nonatomic,weak) NSMutableArray *arrayHourly;
+//@property (nonatomic,weak) NSMutableArray *arrayDaily;
 
 @end
 
@@ -36,8 +38,8 @@
     self.manager.delegate = self;
     
     self.currentCondition = [[WeatherCondition alloc] init];
-    self.arrayDaily = [[NSMutableArray alloc] initWithCapacity:10];
-    self.arrayHourly = [[NSMutableArray alloc] initWithCapacity:10];
+    arrayDaily = [[NSMutableArray alloc] initWithCapacity:10];
+    arrayHourly = [[NSMutableArray alloc] initWithCapacity:10];
     
 }
 
@@ -78,10 +80,11 @@
             condition.condition = result[@"list"][i][@"weather"][0][@"description"];
             NSString *key = result[@"list"][i][@"weather"][0][@"icon"];
             condition.icon = [condition imageName:key];
-            [self.arrayDaily addObject:condition];
+            [arrayDaily addObject:condition];
         }
         
-        [self.delegate passDailyForcastToViewController:self.arrayDaily];
+        [self.delegate passDailyForcastToViewController:arrayDaily];
+        [arrayDaily removeAllObjects];
     }];
     
     
@@ -93,11 +96,11 @@
             condition.temperature = result[@"list"][i][@"main"][@"temp"];
             NSString *key = result[@"list"][i][@"weather"][0][@"icon"];
             condition.icon = [condition imageName:key];
-            [self.arrayHourly addObject:condition];
+            [arrayHourly addObject:condition];
         }
         
-        [self.delegate passHourlyForcastToViewController:self.arrayHourly];
-        
+        [self.delegate passHourlyForcastToViewController:arrayHourly];
+        [arrayHourly removeAllObjects];
     }];
 }
 

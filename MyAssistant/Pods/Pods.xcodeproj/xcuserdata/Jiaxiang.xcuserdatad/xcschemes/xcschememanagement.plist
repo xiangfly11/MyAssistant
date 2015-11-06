@@ -8,89 +8,71 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
-		<key>DownPicker-DownPicker.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>DownPicker.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>MBProgressHUD.xcscheme</key>
+		<key>HexColors.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
-		<key>MJRefresh.xcscheme</key>
+		<key>LBBlurredImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
+		</dict>
+		<key>Mantle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OpenWeatherMapAPI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
+		</dict>
+		<key>TSMessages.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
+		<key>426BC4549A625B5E1E4200D5261A98BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5BC391E0F47E1DAB9697672D8CDB83C6</key>
+		<key>61681BF0E677683490353B846C61A129</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5BE384F6123112999EE4BA13F04ED48E</key>
+		<key>785E456A4B5EC8A508CE868E04789C03</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5C05FADE30EF910B83CBF24CED9FD2F6</key>
+		<key>8DD4861B07B9FDDDBA3B08D282E6D132</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>693B2A6DCC2C12FFAEB3A7A3719A5403</key>
+		<key>92992C7343BB64D0F0BFCB37CE5E5986</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6A555FFDEDC09DDD21CB34B51A601DF0</key>
+		<key>A9CBFC1BEF918DBE9D6EEA348A35DE64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F74D9EA91F4C43190670066BAC37D44</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>926A84365F6B93264AF882DA49B7E685</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>93A8AD23701074F5AADD9741242F6BFC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
+		<key>E9EF397B95762DDB254C71DDCB4B1381</key>
 		<dict>
 			<key>primary</key>
 			<true/>

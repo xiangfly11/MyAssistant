@@ -2,39 +2,44 @@
 //  WeatherViewController.m
 //  MyAssistant
 //
-//  Created by Jiaxiang Li on 10/22/15.
+//  Created by Jiaxiang Li on 11/4/15.
 //  Copyright © 2015 Jiaxiang Li. All rights reserved.
 //
 
 #import "WeatherViewController.h"
 #import "SWRevealViewController.h"
-
-#import "CoreDataStack.h"
-#import "LocationEntity.h"
-
-
-@interface WeatherViewController ()@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tempLabel;
-@property (weak, nonatomic) IBOutlet UIButton *infoButton;
-@property (strong,nonatomic) CLLocationManager *locationManager;
-@property (strong,nonatomic) NSString *urlStr;
-@property (strong,nonatomic) NSURL *url;
-
-
-@property (strong,nonatomic) CLLocation *currentLocation;
-
-@property (strong,nonatomic) NSFetchedResultsController *fetchedResultsController;
+#import "WeatherManager.h"
+#import "WeatherClient.h"
+@interface WeatherViewController ()<WeatherClientDelegate>{
+    UILabel *temperatureLabel;
+    UILabel *hiloLabel;
+    UILabel *cityLabel;
+    UILabel *conditionsLabel;
+    UIImageView *iconView;
+    
+}
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *slideMenuButton;
+@property (strong,nonatomic) WeatherManager *weatherManager;
+@property (strong,nonatomic) WeatherClient *weatherClient;
+@property (strong,nonatomic) NSMutableArray *dailyArray;
+@property (strong,nonatomic) NSMutableArray *hourlyArray;
+@property (nonatomic, strong) NSDateFormatter *hourlyFormatter;
+@property (nonatomic, strong) NSDateFormatter *dailyFormatter;
 
 @end
 
 @implementation WeatherViewController
 
+
+
+-(void)viewWillLayoutSubviews {
+    self.tableView.frame = self.view.bounds;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     SWRevealViewController *revealViewController = self.revealViewController;
     
     if (revealViewController) {
@@ -45,16 +50,17 @@
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
-    self.urlStr = [[NSString alloc] init];
-    self.url = [[NSURL alloc] init];
     
-    self.tableView.delegate = self;
     
-    [self.tableView setDataSource:self];
     
-    [self configureLocationManager];
+    [self configureViews];
     
-    [self.fetchedResultsController performFetch:nil];
+    //[[WeatherManager sharedManager] findCurrentLocation];
+    self.weatherManager = [WeatherManager sharedManager];
+    self.weatherClient = [[WeatherClient alloc] init];
+    self.weatherManager.delegate = self.weatherClient;
+    self.weatherClient.delegate = self;
+    [self.weatherManager findCurrentLocation];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,307 +68,162 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) configureLocationManager {
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+
+-(void) configureViews {
+    UIImage *backgroundImage = [UIImage imageNamed:@"bg"];
     
-    self.locationManager.distanceFilter = 10000;
+    self.blurredImageView.alpha = 0;
+    [self.blurredImageView setImageToBlur:backgroundImage blurRadius:10 completionBlock:nil];
     
-    self.locationManager.delegate = self;
+    self.tableView = [[UITableView alloc] init];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
+    self.tableView.pagingEnabled = YES;
+    [self.view addSubview:self.tableView];
     
-    [self.locationManager requestWhenInUseAuthorization];
+    CGRect headerFrame = [UIScreen mainScreen].bounds;
     
-    [self.locationManager startUpdatingLocation];
+    CGFloat inset = 40;
+    
+    CGFloat temperatureHeight = 110;
+    CGFloat hiloHeight = 70;
+    CGFloat iconHeight = 30;
+    
+    CGRect hiloFrame = CGRectMake(inset,
+                                  headerFrame.size.height - hiloHeight,
+                                  headerFrame.size.width - (2 * inset),
+                                  hiloHeight);
+    
+    CGRect temperatureFrame = CGRectMake(20,
+                                         headerFrame.size.height - (temperatureHeight + hiloHeight),
+                                         headerFrame.size.width - (2 * inset),
+                                         temperatureHeight);
+    
+    CGRect iconFrame = CGRectMake(inset,
+                                  temperatureFrame.origin.y - iconHeight,
+                                  iconHeight,
+                                  iconHeight);
+    
+    CGRect conditionsFrame = iconFrame;
+    conditionsFrame.size.width = self.view.bounds.size.width - (((2 * inset) + iconHeight) + 10);
+    conditionsFrame.origin.x = iconFrame.origin.x + (iconHeight + 10);
+    
+    
+    UIView *header = [[UIView alloc] initWithFrame:headerFrame];
+    header.backgroundColor = [UIColor clearColor];
+    self.tableView.tableHeaderView = header;
+    
+    // 2
+    // bottom left
+    temperatureLabel = [[UILabel alloc] initWithFrame:temperatureFrame];
+    temperatureLabel.backgroundColor = [UIColor clearColor];
+    temperatureLabel.textColor = [UIColor whiteColor];
+    temperatureLabel.text = @"0º";
+    temperatureLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:100];
+    temperatureLabel.textAlignment = NSTextAlignmentLeft;
+    [header addSubview:temperatureLabel];
+    
+    // bottom left
+    hiloLabel = [[UILabel alloc] initWithFrame:hiloFrame];
+    hiloLabel.backgroundColor = [UIColor clearColor];
+    hiloLabel.textColor = [UIColor whiteColor];
+    hiloLabel.text = @"0º / 0º";
+    hiloLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:28];
+    hiloLabel.textAlignment = NSTextAlignmentLeft;
+    [header addSubview:hiloLabel];
+    
+    // top
+    cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width, 30)];
+    cityLabel.backgroundColor = [UIColor clearColor];
+    cityLabel.textColor = [UIColor whiteColor];
+    cityLabel.text = @"Loading...";
+    cityLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24];
+    cityLabel.textAlignment = NSTextAlignmentCenter;
+    [header addSubview:cityLabel];
+    
+    conditionsLabel = [[UILabel alloc] initWithFrame:conditionsFrame];
+    conditionsLabel.backgroundColor = [UIColor clearColor];
+    conditionsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    conditionsLabel.textColor = [UIColor whiteColor];
+    conditionsLabel.textAlignment = NSTextAlignmentLeft;
+    [header addSubview:conditionsLabel];
+    
+    // 3
+    // bottom left
+    iconView = [[UIImageView alloc] initWithFrame:iconFrame];
+    iconView.contentMode = UIViewContentModeScaleAspectFit;
+    iconView.backgroundColor = [UIColor clearColor];
+    [header addSubview:iconView];
+
 }
 
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
-    self.currentLocation = [locations  lastObject];
-    
-    CLGeocoder *gecoder = [[CLGeocoder alloc] init];
-    [gecoder reverseGeocodeLocation:self.currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Gecoder Error:%@",error.localizedDescription);
-        }
-        
-        if (placemarks.count > 0) {
-            CLPlacemark *currentPlacemark = [placemarks lastObject];
-            
-            NSString *currentCityName = [currentPlacemark.locality lowercaseString];
-            
-            NSString *currentCountry = [currentPlacemark.country lowercaseString];
-            
-            [self getWeatherInfoWithCity:currentCityName andCountry:currentCountry boolCurrentLocation:YES];
-        }
-    }];
-    
-    [self.locationManager stopUpdatingLocation];
+#pragma UITableViewDataSource 
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
-
--(void) getWeatherInfoWithCity:(NSString *) cityName andCountry:(NSString *) country boolCurrentLocation:(BOOL) isCurrentLocation {
-    
-    //NSString *urlStr = [[NSString alloc] init];
-    if(isCurrentLocation == YES){
-        self.urlStr= [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",cityName];
-    }else {
-        self.urlStr = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@&appid=e40fd6f9191b29b575b0f77a9ce44bf6",cityName];
-        //self.urlStr = @"http://api.openweathermap.org/data/2.5/weather?q=london&appid=e40fd6f9191b29b575b0f77a9ce44bf6";
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return self.hourlyArray.count+1;
+        //return 3;
     }
     
-    
-    //NSURL *url = [[NSURL alloc] init];
-    self.url = [NSURL URLWithString:[self.urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    
-    
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:self.url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *)response;
-        
-        if (!error && urlResponse.statusCode == 200) {
-            NSError *jsonError;
-            
-            NSDictionary *weatherInfo = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-            
-            if (!error) {
-                NSDictionary *mainDict = [weatherInfo objectForKey:@"main"];
-                
-                NSNumber *tempInKelvin = [mainDict objectForKey:@"temp"];
-                
-                NSInteger tempInCelsius = [tempInKelvin integerValue] - 273.15;
-                
-                NSArray *weatherArray = [weatherInfo objectForKey:@"weather"];
-                
-                NSString *weatherDescription;
-                for (NSDictionary *contents in weatherArray) {
-                    weatherDescription = [contents objectForKey:@"description"];
-                }
-                
-                NSDictionary *sysDict = [weatherInfo objectForKey:@"sys"];
-                
-                NSString *countryCode = [sysDict objectForKey:@"country"];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.tempLabel.text = [NSString stringWithFormat:@"%.1ld℃",(long)tempInCelsius];
-                    
-                    self.addressLabel.text = [NSString stringWithFormat:@"%@,%@",cityName,countryCode];
-                    
-                    self.descriptionLabel.text = weatherDescription;
-                    
-                    self.addressLabel.font = [UIFont boldSystemFontOfSize:16];
-                    
-                    self.tempLabel.font = [UIFont boldSystemFontOfSize:86];
-                    
-                    self.descriptionLabel.font = [UIFont boldSystemFontOfSize:16];
-                    
-                });
-                
-            }
-        }
-    } ];
-    
-    
-    [dataTask resume];
-    
-    
-//    if (isCurrentLocation == YES) {
-//        <#statements#>
-//    }
-    
+    return self.dailyArray.count+1;
+    //return 3;
 }
 
--(NSFetchedResultsController *)fetchedResultsController {
-    
-    if (_fetchedResultsController != nil) {
-        return  _fetchedResultsController;
-    }
-    
-    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
-    
-    NSFetchRequest *fetchRequest = [self entryListFetchRequest];
-    
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"cityName" cacheName:nil];
-    
-    _fetchedResultsController.delegate = self;
-    
-    return _fetchedResultsController;
-}
-
-
--(NSFetchRequest *) entryListFetchRequest {
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"LocationEntity"];
-    
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:NO]];
-    
-    return fetchRequest;
-}
-
-
-
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections] [section];
-    
-    return [sectionInfo name];
-}
-
--(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return UITableViewCellEditingStyleDelete;
-}
-
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    LocationEntity *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
-    
-    [[coreDataStack managedObjectContext] deleteObject:entry];
-    
-    [coreDataStack saveContext];
-}
-
-
--(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    
-    [self.tableView beginUpdates];
-}
-
-
-
-
-
--(void) controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        default:
-            break;
-    }
-    
-}
-
-
--(void) controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        default:
-            break;
-    }
-    
-}
-
-
--(void) controllerDidChangeContent: (NSFetchedResultsController *) controller {
-    
-    //NSLog(@"controllerDidChangeContent===============");
-    [self.tableView endUpdates];
-}
-
-
-
-
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    // Return the number of sections.
-    
-    NSLog(@"numberOfSectionsInTableView:%ld",self.fetchedResultsController.sections.count);
-    return self.fetchedResultsController.sections.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    // Return the number of rows in the section.
-    
-    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections] [section];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"cell";
     
     
-    NSLog(@"tableView,numberOfRowInSection:%ld",[sectionInfo numberOfObjects]);
-
-    return [sectionInfo numberOfObjects];
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSLog(@"tableView,cellForRowAtIndexPath");
-    static NSString *identifier = @"cityNameCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
+    }
+    
+    //cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    
+    NSLog(@"%ld",(long)indexPath.row);
+    //WeatherCondition *hourlyCondition = self.hourlyArray[indexPath.row-1];
+    
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [self configureHeaderCell:cell title:@"Hourly Forcast"];
+        }else {
+            WeatherCondition *hourlyCondition = self.hourlyArray[indexPath.row-1];
+            [self configureHourlyCell:cell weatherCondition:hourlyCondition];
+        }
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            [self configureHeaderCell:cell title:@"Daily Forcast"];
+        }else {
+            WeatherCondition *dailyCondition = self.dailyArray[indexPath.row-1];
+            [self configureDailyCell:cell weatherCondition:dailyCondition];
+        }
     }
     
     
     
-    
-    // Configure the cell...
-    
-    LocationEntity *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    
-    
-    
-    //cell.textLabel.text = entry.body;
-    
-    //[cell configureCellForEntry: entry];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@,%@",entry.cityName,entry.countryCode];
-    
-    
-    NSLog(@"cell:%@,%@",entry.cityName,entry.countryCode);
-    
-    return cell;
+    return  cell;
 }
 
 
-
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    LocationEntity *entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    NSString *cityName = [entity.cityName lowercaseString];
-    NSString *countryCode = [entity.countryCode lowercaseString];
-    
-    [self getWeatherInfoWithCity:cityName andCountry:countryCode boolCurrentLocation:NO];
-    
-    
-    
+#pragma UITableVeiwDelegate 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger cellCount = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    return self.view.bounds.size.height / (CGFloat)cellCount;
 }
-
-
-
-//- (IBAction)addWasPressed:(id)sender {
-//    
-//    [self performSegueWithIdentifier:@"addLocation" sender:self];
-//}
 
 
 /*
@@ -374,5 +235,68 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void) passWeatherConditonToViewController:(WeatherCondition *)condition {
+    cityLabel.text = condition.locationName;
+    temperatureLabel.text = [NSString stringWithFormat:@"%.0fº",[condition.temperature floatValue]];
+    iconView.image = [UIImage imageNamed:condition.icon];
+    //hiloLabel.text = [NSString stringWithFormat:@"%.0fº/%.0fº",[condition.tempLow floatValue],[condition.tempHigh floatValue]];
+    hiloLabel.text = [NSString stringWithFormat:@"%.0f %%",[condition.humidity floatValue]];
+    conditionsLabel.text = condition.condition;
+}
+
+-(void) passDailyForcastToViewController:(NSMutableArray *)arrayDaily {
+    self.dailyArray = [[NSMutableArray alloc] initWithArray:arrayDaily];
+    
+    NSLog(@"%lu",(unsigned long)self.dailyArray.count);
+    [self.tableView reloadData];
+    
+}
+
+
+-(void) passHourlyForcastToViewController:(NSMutableArray *)arrayHourly {
+    self.hourlyArray = [[NSMutableArray alloc] initWithArray:arrayHourly];
+    [self.tableView reloadData];
+}
+
+
+-(void) configureHeaderCell:(UITableViewCell *) cell title:(NSString *) titleStr {
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = titleStr;
+    cell.detailTextLabel.text = @"";
+    cell.imageView.image = nil;
+}
+
+-(void) configureHourlyCell:(UITableViewCell *) cell weatherCondition:(WeatherCondition *) hourlyCondition {
+    self.hourlyFormatter = [[NSDateFormatter alloc] init];
+    self.hourlyFormatter.dateFormat = @"h a";
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = [self.hourlyFormatter stringFromDate:hourlyCondition.date];
+   
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f°",hourlyCondition.temperature.floatValue];
+    cell.imageView.image = [UIImage imageNamed:hourlyCondition.icon];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+}
+
+-(void) configureDailyCell:(UITableViewCell *) cell weatherCondition:(WeatherCondition *) dailyCondition {
+    NSString *dateComponents = @"yyMMdd";
+    NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:dateComponents options:0 locale:[NSLocale systemLocale] ];
+    self.dailyFormatter = [[NSDateFormatter alloc] init];
+    [self.dailyFormatter setDateFormat:dateFormat];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.text = [self.dailyFormatter stringFromDate:dailyCondition.date];
+    NSLog(@"Date:%@",[self.dailyFormatter stringFromDate:dailyCondition.date]);
+    NSLog(@"Temp====%.0f",[dailyCondition.tempHigh floatValue]);
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f° / %.0f°",
+                                 [dailyCondition.tempLow floatValue],
+                                 [dailyCondition.tempHigh floatValue]];
+    
+    NSLog(@"Tem:%@",cell.detailTextLabel.text);
+    cell.imageView.image = [UIImage imageNamed:dailyCondition.icon];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+}
 
 @end

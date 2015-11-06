@@ -12,15 +12,14 @@
 #import "NewsEntry.h"
 #import "MainViewCell.h"
 #import "NewsDetailViewController.h"
-#import <MBProgressHUD/MBProgressHUD.h>
-#import <MJRefresh/MJRefresh.h>
+
 #import "MainViewCellWithoutImage.h"
 
 @interface MainViewController()
 
 @property (nonatomic,strong) NSMutableArray *myNewsEntries;
 @property (nonatomic) NSInteger selectedRowIndex;
-@property (nonatomic,strong) MBProgressHUD *loading;
+
 
 @end
 
@@ -64,14 +63,14 @@
     
     [self.newsManage connectEntries];
     
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        //[self.tableView.header beginRefreshing];
-        [self.newsManage connectEntries];
-        if (self.myNewsEntries.count != 0) {
-            [self.tableView.header endRefreshing];
-        }
-        
-    }];
+//    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        //[self.tableView.header beginRefreshing];
+//        [self.newsManage connectEntries];
+//        if (self.myNewsEntries.count != 0) {
+//            [self.tableView.header endRefreshing];
+//        }
+//        
+//    }];
     
     
     [self.tableView setDelegate:self];

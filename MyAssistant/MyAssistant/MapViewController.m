@@ -11,7 +11,6 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "RouteViewController.h"
-#import "AnnotationButton.h"
 #import "LocationDetailViewController.h"
 
 @interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollisionBehaviorDelegate> {
@@ -65,7 +64,7 @@
     }
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height-200, self.view.frame.size.width, 200.0f) style:UITableViewStylePlain];
-    
+    [self.tableView setAlpha:0.7f];
     [self.view addSubview:self.tableView];
     annotations = [[NSMutableArray alloc] init];
     resultPlacemark = [[NSMutableArray alloc] init];

@@ -1,5 +1,7 @@
 platform :ios, '7.0'
-pod "AFNetworking", "~> 2.0"
-pod 'MBProgressHUD', '~> 0.9.1'
-pod 'MJRefresh'
-pod "DownPicker"
+pod "AFNetworking", "~> 1.3.1"
+pod 'Mantle'
+pod 'LBBlurredImage'
+pod 'TSMessages'
+pod 'OpenWeatherMapAPI', '~> 0.0.5'
+

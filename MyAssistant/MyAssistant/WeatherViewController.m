@@ -159,6 +159,16 @@
 
 }
 
+#pragma UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // 1
+    CGFloat height = scrollView.bounds.size.height;
+    CGFloat position = MAX(scrollView.contentOffset.y, 0.0);
+    // 2
+    CGFloat percent = MIN(position / height, 1.0);
+    // 3
+    self.blurredImageView.alpha = percent;
+}
 
 #pragma UITableViewDataSource 
 

@@ -177,12 +177,17 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    NSInteger count;
     if (section == 0) {
-        return self.hourlyArray.count+1;
+        count = self.hourlyArray.count+1;
         //return 3;
+    }else if (section == 1) {
+        count = self.dailyArray.count+1;
     }
     
-    return self.dailyArray.count+1;
+    return count;
+    
     //return 3;
 }
 

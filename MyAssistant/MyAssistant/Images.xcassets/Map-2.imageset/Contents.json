@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "navigation.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "earth-globe.png"
     },
     {
       "idiom" : "universal",

@@ -7,9 +7,10 @@
 //
 
 #import "WeatherViewController.h"
-#import "SWRevealViewController.h"
 #import "WeatherManager.h"
 #import "WeatherClient.h"
+#import "WeatherPageViewController.h"
+#import "SWRevealViewController.h"
 @interface WeatherViewController ()<WeatherClientDelegate>{
     UILabel *temperatureLabel;
     UILabel *hiloLabel;
@@ -25,6 +26,7 @@
 @property (strong,nonatomic) NSMutableArray *hourlyArray;
 @property (nonatomic, strong) NSDateFormatter *hourlyFormatter;
 @property (nonatomic, strong) NSDateFormatter *dailyFormatter;
+//@property (nonatomic,strong) WeatherPageViewController *pageViewController;
 
 @end
 
@@ -40,18 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    SWRevealViewController *revealViewController = self.revealViewController;
-    
-    if (revealViewController) {
-        [self.slideMenuButton setTarget:self.revealViewController];
-        
-        [self.slideMenuButton setAction:@selector(revealToggle:)];
-        
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
-    
-    
-    
     
     [self configureViews];
     
@@ -60,7 +50,13 @@
     self.weatherClient = [[WeatherClient alloc] init];
     self.weatherManager.delegate = self.weatherClient;
     self.weatherClient.delegate = self;
-    [self.weatherManager findCurrentLocation];
+    if (self.cityName == nil) {
+        [self.weatherManager findCurrentLocation];
+    }else {
+        [self.weatherManager findWeatherWithCity: self.cityName];
+    }
+    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,7 +66,7 @@
 
 
 -(void) configureViews {
-    UIImage *backgroundImage = [UIImage imageNamed:@"bg"];
+    UIImage *backgroundImage = [UIImage imageNamed:@"weather_bg"];
     
     self.blurredImageView.alpha = 0;
     [self.blurredImageView setImageToBlur:backgroundImage blurRadius:10 completionBlock:nil];
@@ -81,6 +77,7 @@
     self.tableView.delegate = self;
     self.tableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
     self.tableView.pagingEnabled = YES;
+    
     [self.view addSubview:self.tableView];
     
     CGRect headerFrame = [UIScreen mainScreen].bounds;
@@ -90,7 +87,10 @@
     CGFloat temperatureHeight = 110;
     CGFloat hiloHeight = 70;
     CGFloat iconHeight = 30;
-    
+//    CGFloat Y_AddButton = 200;
+    CGFloat X_AddButton = 80;
+    CGFloat Height_AddButton = 45;
+    CGFloat Width_AddButton = 45;
     CGRect hiloFrame = CGRectMake(inset,
                                   headerFrame.size.height - hiloHeight,
                                   headerFrame.size.width - (2 * inset),
@@ -111,12 +111,18 @@
     conditionsFrame.origin.x = iconFrame.origin.x + (iconHeight + 10);
     
     
+    //CGRect addButtonFrame = CGRectMake(headerFrame.size.width - X_AddButton, headerFrame.size.height - Y_AddButton, Width_AddButton, Height_AddButton);
+   
+    CGRect addButtonFrame = hiloFrame;
+    addButtonFrame.origin.x = headerFrame.size.width - X_AddButton;
+    addButtonFrame.size.width = Width_AddButton;
+    addButtonFrame.size.height = Height_AddButton;
+    
     UIView *header = [[UIView alloc] initWithFrame:headerFrame];
     header.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = header;
     
-    // 2
-    // bottom left
+    
     temperatureLabel = [[UILabel alloc] initWithFrame:temperatureFrame];
     temperatureLabel.backgroundColor = [UIColor clearColor];
     temperatureLabel.textColor = [UIColor whiteColor];
@@ -124,17 +130,16 @@
     temperatureLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:100];
     temperatureLabel.textAlignment = NSTextAlignmentLeft;
     [header addSubview:temperatureLabel];
-    
-    // bottom left
+   
     hiloLabel = [[UILabel alloc] initWithFrame:hiloFrame];
     hiloLabel.backgroundColor = [UIColor clearColor];
     hiloLabel.textColor = [UIColor whiteColor];
-    hiloLabel.text = @"0º / 0º";
+    hiloLabel.text = @"0º%%";
     hiloLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:28];
     hiloLabel.textAlignment = NSTextAlignmentLeft;
     [header addSubview:hiloLabel];
     
-    // top
+    
     cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width, 30)];
     cityLabel.backgroundColor = [UIColor clearColor];
     cityLabel.textColor = [UIColor whiteColor];
@@ -150,12 +155,19 @@
     conditionsLabel.textAlignment = NSTextAlignmentLeft;
     [header addSubview:conditionsLabel];
     
-    // 3
-    // bottom left
+   
     iconView = [[UIImageView alloc] initWithFrame:iconFrame];
     iconView.contentMode = UIViewContentModeScaleAspectFit;
     iconView.backgroundColor = [UIColor clearColor];
     [header addSubview:iconView];
+    
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:addButtonFrame];
+    UIImage *image = [UIImage imageNamed:@"add"];
+    [button setImage:image forState:UIControlStateNormal];
+    //button.backgroundColor = [UIColor redColor];
+    [button addTarget:self action:@selector(addButtonWasPressed) forControlEvents:UIControlEventTouchDown];
+    [header addSubview:button];
 
 }
 
@@ -252,7 +264,11 @@
 */
 
 -(void) passWeatherConditonToViewController:(WeatherCondition *)condition {
-    cityLabel.text = condition.locationName;
+    if (self.cityName != nil) {
+        cityLabel.text = self.cityName;
+    }else {
+        cityLabel.text = condition.locationName;
+    }
     temperatureLabel.text = [NSString stringWithFormat:@"%.0fº",[condition.temperature floatValue]];
     iconView.image = [UIImage imageNamed:condition.icon];
     //hiloLabel.text = [NSString stringWithFormat:@"%.0fº/%.0fº",[condition.tempLow floatValue],[condition.tempHigh floatValue]];
@@ -316,5 +332,11 @@
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
 }
+
+-(void) addButtonWasPressed {
+    [self performSegueWithIdentifier:@"addLocation" sender:self];
+}
+
+
 
 @end

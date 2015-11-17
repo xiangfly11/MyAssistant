@@ -28,7 +28,6 @@
 		2EF21A7E1B90D41E008FD30A /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF21A7D1B90D41E008FD30A /* CoreDataStack.m */; };
 		2EF21A841B90F67F008FD30A /* SlideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EF21A831B90F67F008FD30A /* SlideMenuCell.m */; };
 		700BB3A61B9FD8E600C95757 /* MainViewCellWithoutImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 700BB3A51B9FD8E600C95757 /* MainViewCellWithoutImage.m */; };
-		7021A7911BEAACA4004E66A2 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 7021A7901BEAACA4004E66A2 /* Images */; settings = {ASSET_TAGS = (); }; };
 		7021A7941BEAAF6C004E66A2 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7021A7931BEAAF6C004E66A2 /* WeatherViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7021A7A11BEBB429004E66A2 /* WeatherDailyForcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 7021A7A01BEBB429004E66A2 /* WeatherDailyForcast.m */; settings = {ASSET_TAGS = (); }; };
 		7021A7A41BEBBA08004E66A2 /* WeatherClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7021A7A31BEBBA08004E66A2 /* WeatherClient.m */; settings = {ASSET_TAGS = (); }; };
@@ -40,9 +39,12 @@
 		705074621B9DDE5700F07C9C /* EditNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 705074611B9DDE5700F07C9C /* EditNotesViewController.m */; };
 		705204C21B9FF32400972E62 /* NewNotesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 705204C11B9FF32400972E62 /* NewNotesEntity.m */; };
 		707558FB1B9C01FE001C8B0B /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 707558FA1B9C01FE001C8B0B /* NewsDetailViewController.m */; };
+		708465E91BF516AD0008A05F /* OriginWeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 708465E81BF516AD0008A05F /* OriginWeatherViewController.m */; settings = {ASSET_TAGS = (); }; };
+		708465EC1BF5170F0008A05F /* WeatherPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 708465EB1BF5170F0008A05F /* WeatherPageViewController.m */; settings = {ASSET_TAGS = (); }; };
 		708D61261B989CA000570160 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 708D61251B989CA000570160 /* Podfile */; };
 		70B19DB51B978965009B9692 /* MainViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B19DB41B978965009B9692 /* MainViewCell.m */; };
 		70C423C21BE1220800EFB9C7 /* LocationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70C423C11BE1220800EFB9C7 /* LocationDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		70F1823E1BF9B5AD007D4D4B /* AddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70F1823D1BF9B5AD007D4D4B /* AddLocationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7A12C15A1BBC452A0017C758 /* city_list.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C1591BBC452A0017C758 /* city_list.txt */; settings = {ASSET_TAGS = (); }; };
 		7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
 		7A8BE84E1BD7224700D65C40 /* RouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8BE84D1BD7224700D65C40 /* RouteViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -98,7 +100,6 @@
 		2EF21A831B90F67F008FD30A /* SlideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuCell.m; sourceTree = "<group>"; };
 		700BB3A41B9FD8E600C95757 /* MainViewCellWithoutImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewCellWithoutImage.h; sourceTree = "<group>"; };
 		700BB3A51B9FD8E600C95757 /* MainViewCellWithoutImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewCellWithoutImage.m; sourceTree = "<group>"; };
-		7021A7901BEAACA4004E66A2 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = ../../../../../Users/Jiaxiang/Downloads/Images; sourceTree = "<group>"; };
 		7021A7921BEAAF6C004E66A2 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
 		7021A7931BEAAF6C004E66A2 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		7021A79F1BEBB429004E66A2 /* WeatherDailyForcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDailyForcast.h; sourceTree = "<group>"; };
@@ -123,12 +124,18 @@
 		705204C11B9FF32400972E62 /* NewNotesEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewNotesEntity.m; sourceTree = "<group>"; };
 		707558F91B9C01FE001C8B0B /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
 		707558FA1B9C01FE001C8B0B /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewController.m; sourceTree = "<group>"; };
+		708465E71BF516AD0008A05F /* OriginWeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginWeatherViewController.h; sourceTree = "<group>"; };
+		708465E81BF516AD0008A05F /* OriginWeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OriginWeatherViewController.m; sourceTree = "<group>"; };
+		708465EA1BF5170F0008A05F /* WeatherPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherPageViewController.h; sourceTree = "<group>"; };
+		708465EB1BF5170F0008A05F /* WeatherPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherPageViewController.m; sourceTree = "<group>"; };
 		708D61251B989CA000570160 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		70B19DB31B978965009B9692 /* MainViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewCell.h; sourceTree = "<group>"; };
 		70B19DB41B978965009B9692 /* MainViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewCell.m; sourceTree = "<group>"; };
 		70C423C01BE1220800EFB9C7 /* LocationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationDetailViewController.h; sourceTree = "<group>"; };
 		70C423C11BE1220800EFB9C7 /* LocationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDetailViewController.m; sourceTree = "<group>"; };
 		70CD6A431AF79857F5550714 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		70F1823C1BF9B5AD007D4D4B /* AddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocationViewController.h; sourceTree = "<group>"; };
+		70F1823D1BF9B5AD007D4D4B /* AddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLocationViewController.m; sourceTree = "<group>"; };
 		7A12C1591BBC452A0017C758 /* city_list.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = city_list.txt; sourceTree = "<group>"; };
 		7A8BE8491BD6EE0F00D65C40 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		7A8BE84A1BD6EE0F00D65C40 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
@@ -185,7 +192,6 @@
 		2E4CD4C11B88161A00578925 /* MyAssistant */ = {
 			isa = PBXGroup;
 			children = (
-				7021A7901BEAACA4004E66A2 /* Images */,
 				2EF21A6F1B901829008FD30A /* DataModel */,
 				2EF21A6E1B9017D4008FD30A /* ViewController */,
 				2E4CD4EB1B88170000578925 /* SWRevalViewController */,
@@ -264,6 +270,12 @@
 				70C423C11BE1220800EFB9C7 /* LocationDetailViewController.m */,
 				7021A7921BEAAF6C004E66A2 /* WeatherViewController.h */,
 				7021A7931BEAAF6C004E66A2 /* WeatherViewController.m */,
+				708465E71BF516AD0008A05F /* OriginWeatherViewController.h */,
+				708465E81BF516AD0008A05F /* OriginWeatherViewController.m */,
+				708465EA1BF5170F0008A05F /* WeatherPageViewController.h */,
+				708465EB1BF5170F0008A05F /* WeatherPageViewController.m */,
+				70F1823C1BF9B5AD007D4D4B /* AddLocationViewController.h */,
+				70F1823D1BF9B5AD007D4D4B /* AddLocationViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -410,7 +422,6 @@
 				2E4CD4D31B88161A00578925 /* LaunchScreen.xib in Resources */,
 				708D61261B989CA000570160 /* Podfile in Resources */,
 				7A12C15A1BBC452A0017C758 /* city_list.txt in Resources */,
-				7021A7911BEAACA4004E66A2 /* Images in Resources */,
 				2E4CD4D01B88161A00578925 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,7 +492,9 @@
 				705204C21B9FF32400972E62 /* NewNotesEntity.m in Sources */,
 				2E4CD4C81B88161A00578925 /* AppDelegate.m in Sources */,
 				2EF21A751B901A48008FD30A /* NewsEntryBuilder.m in Sources */,
+				708465EC1BF5170F0008A05F /* WeatherPageViewController.m in Sources */,
 				2E428EFC1B8F97E300048715 /* CoreData.xcdatamodeld in Sources */,
+				70F1823E1BF9B5AD007D4D4B /* AddLocationViewController.m in Sources */,
 				7021A7A41BEBBA08004E66A2 /* WeatherClient.m in Sources */,
 				7A8BE84E1BD7224700D65C40 /* RouteViewController.m in Sources */,
 				7021A7A71BEBBA1B004E66A2 /* WeatherManager.m in Sources */,
@@ -491,6 +504,7 @@
 				7A8BE84B1BD6EE0F00D65C40 /* MapViewController.m in Sources */,
 				2E4CD4C51B88161A00578925 /* main.m in Sources */,
 				7044889C1BDC625300607A9B /* LocationEntity.m in Sources */,
+				708465E91BF516AD0008A05F /* OriginWeatherViewController.m in Sources */,
 				2EBF118C1B964B2C000EB632 /* NewsManage.m in Sources */,
 				700BB3A61B9FD8E600C95757 /* MainViewCellWithoutImage.m in Sources */,
 				705074621B9DDE5700F07C9C /* EditNotesViewController.m in Sources */,

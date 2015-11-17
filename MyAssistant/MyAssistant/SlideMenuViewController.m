@@ -88,16 +88,16 @@
     NSLog(@"%ld",index);
     
     switch (index) {
-        case 1:
+        case 0:
             [self performSegueWithIdentifier:@"goToNews" sender:self];
             break;
-        case 2:
+        case 1:
             [self performSegueWithIdentifier:@"goToForcast" sender:self];
             break;
-        case 3:
+        case 2:
             [self performSegueWithIdentifier:@"goToMap" sender:self];
             break;
-        case 4:
+        case 3:
             [self performSegueWithIdentifier:@"goToNotes" sender:self];
             break;
         default:

@@ -12,6 +12,7 @@
 #import "WeatherManager.h"
 #import "OWMWeatherAPI.h"
 #import "WeatherManagerDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface WeatherClient() {
     CLLocationCoordinate2D currentCoordinate;
@@ -23,13 +24,39 @@
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) WeatherCondition  *currentCondition;
 @property (nonatomic,strong) WeatherManager *manager;
-//@property (nonatomic,weak) NSMutableArray *arrayHourly;
-//@property (nonatomic,weak) NSMutableArray *arrayDaily;
+
 
 @end
 
 @implementation WeatherClient
 
+
+-(void)passLocationToClient:(CLLocation *)location {
+    currentCoordinate = location.coordinate;
+    
+    
+    [self configureData];
+    [self getWeatherByCoordinate:currentCoordinate];
+    NSLog(@"%@",location);
+    
+}
+
+-(void) passCityNameToClient:(NSString *)cityName {
+    [self configureData];
+    
+    CLGeocoder *gecoder = [[CLGeocoder alloc] init];
+    
+    [gecoder geocodeAddressString:cityName completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (placemarks.count > 0) {
+            CLPlacemark *placemark = [placemarks firstObject];
+            CLLocationCoordinate2D coordinate = placemark.location.coordinate;
+            [self getWeatherByCoordinate:coordinate];
+        }else {
+            NSLog(@"Gecoder Error:%@",[error localizedDescription]);
+        }
+    }];
+    
+}
 
 -(void) configureData {
     weatherAPI = [[OWMWeatherAPI alloc] initWithAPIKey:@"e40fd6f9191b29b575b0f77a9ce44bf6"];
@@ -44,18 +71,11 @@
 }
 
 
--(void)passLocationToClient:(CLLocation *)location {
-    currentCoordinate = location.coordinate;
-    
-    
-    [self configureData];
-    [self getCurrentWeatherByCoordinate:currentCoordinate];
-    NSLog(@"%@",location);
-    
-}
 
 
--(void) getCurrentWeatherByCoordinate:(CLLocationCoordinate2D) coordinate {
+
+
+-(void) getWeatherByCoordinate:(CLLocationCoordinate2D) coordinate {
     
     
     [weatherAPI currentWeatherByCoordinate:coordinate withCallback:^(NSError *error, NSDictionary *result) {
@@ -103,6 +123,7 @@
         [arrayHourly removeAllObjects];
     }];
 }
+
 
 
 @end

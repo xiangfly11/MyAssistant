@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0109BBE4FB318991A2C10901'
+               BlueprintIdentifier = '9CF2D0445106DE0568405B84'
                BlueprintName = 'OpenWeatherMapAPI'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libOpenWeatherMapAPI.a'>

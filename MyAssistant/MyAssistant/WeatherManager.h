@@ -25,5 +25,5 @@
 @property (nonatomic,weak) id<WeatherManagerDelegate> delegate;
 
 - (void)findCurrentLocation;
-
+-(void) findWeatherWithCity: (NSString *) cityName;
 @end

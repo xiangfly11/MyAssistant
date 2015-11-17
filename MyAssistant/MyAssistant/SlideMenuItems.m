@@ -13,7 +13,7 @@
 -(instancetype) init{
     self = [super init];
     if (self) {
-        _items = [NSArray arrayWithObjects:@"Title",@"News",@"Weather",@"Map",@"Notes", nil];
+        _items = [NSArray arrayWithObjects:@"News",@"Weather",@"Map",@"Notes", nil];
     }
     
     

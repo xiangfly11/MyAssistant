@@ -12,5 +12,5 @@
 @protocol WeatherManagerDelegate <NSObject>
 
 -(void) passLocationToClient:(CLLocation *) location;
-
+-(void) passCityNameToClient:(NSString *) cityName;
 @end

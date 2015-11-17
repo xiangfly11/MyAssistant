@@ -73,6 +73,9 @@
     [self.locationManager stopUpdatingLocation];
 }
 
+-(void)findWeatherWithCity:(NSString *)cityName {
+    [self.delegate passCityNameToClient:cityName];
+}
 
 
 @end

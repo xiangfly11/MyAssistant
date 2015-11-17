@@ -13,7 +13,9 @@
 #import "RouteViewController.h"
 #import "LocationDetailViewController.h"
 
-@interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate,UICollisionBehaviorDelegate> {
+
+
+@interface MapViewController ()<UISearchBarDelegate,CLLocationManagerDelegate,MKMapViewDelegate,UITableViewDataSource,UITableViewDelegate> {
     
     NSString *searchBarInput;
     NSMutableArray *annotations;
@@ -21,12 +23,15 @@
     NSMutableArray *resultMapItem;
     NSMutableArray *annotationTitle;
     NSUInteger selectedRowIndex;
+    BOOL isListShow;
     
 }
+
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *slideMenuButton;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong,nonatomic) CLLocationManager *locationManager;
 @property (strong,nonatomic) CLLocation *currentLocation;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolBar;
@@ -74,6 +79,8 @@
     self.mapView.delegate = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    isListShow = NO;
     
     [self configueCLLocationManager];
     
@@ -142,6 +149,8 @@
     CGRect tableViewFram = self.tableView.frame;
     tableViewFram.origin.y= self.view.bounds.size.height+self.tableView.bounds.size.height;
 
+    if (isListShow == YES) {
+        
         [UITableView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.tableView.frame = tableViewFram;
             //self.tableView.hidden = YES;
@@ -151,7 +160,17 @@
             [resultMapItem removeAllObjects];
             [resultPlacemark removeAllObjects];
             [annotationTitle removeAllObjects];
+            isListShow = NO;
+            self.showListButton.title = @"Show List";
         }];
+
+    }
+    
+    [annotations removeAllObjects];
+    [resultMapItem removeAllObjects];
+    [resultPlacemark removeAllObjects];
+    [annotationTitle removeAllObjects];
+    
   
     
 
@@ -192,6 +211,7 @@
                     MKPlacemark *placemark = item.placemark;
                     annotation.subtitle = [NSString stringWithFormat:@"%@ %@,%@,%@,%@",placemark.subThoroughfare,placemark.thoroughfare,placemark.locality,placemark.administrativeArea,placemark.postalCode];
                     annotation.title = placemark.name;
+                    NSLog(@"Annotation:=== %@",annotation.title);
                     annotation.coordinate = placemark.coordinate;
                     
                     [annotations addObject:annotation];
@@ -218,6 +238,7 @@
     
     
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        NSLog(@"!!!!");
         
         return  nil;
     }
@@ -229,19 +250,20 @@
         
         if (!pinAnnotationView) {
             pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-            pinAnnotationView.canShowCallout = YES;
-            pinAnnotationView.animatesDrop = YES;
             
-            UIButton *rightBtn=[UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            [rightBtn setTitle:[NSString stringWithFormat:@"%@",annotation.title] forState:UIControlStateNormal];
-            
-            [rightBtn addTarget:nil action:@selector(showMoreInfoInActionSheet:) forControlEvents:UIControlEventTouchUpInside];
-            
-            pinAnnotationView.rightCalloutAccessoryView = rightBtn;
         
         }
         
+        pinAnnotationView.canShowCallout = YES;
+        pinAnnotationView.animatesDrop = YES;
         
+        UIButton *rightBtn=[UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        [rightBtn setTitle:[NSString stringWithFormat:@"%@",annotation.title] forState:UIControlStateNormal];
+        NSLog(@"Button\\\\\%@",rightBtn.currentTitle);
+        
+        [rightBtn addTarget:nil action:@selector(showMoreInfoInActionSheet:) forControlEvents:UIControlEventTouchUpInside];
+        
+        pinAnnotationView.rightCalloutAccessoryView = rightBtn;
         
     
     }
@@ -329,18 +351,34 @@
 }
 - (IBAction)showListWasPressed:(id)sender {
     
-    CGRect tableViewFrame = self.tableView.frame;
-    tableViewFrame.origin.y = self.view.bounds.size.height-self.toolBar.frame.size.height-self.tableView.frame.size.height;
     
     
-        
+    
+    if (isListShow == NO) {
+        CGRect tableViewFrame = self.tableView.frame;
+        tableViewFrame.origin.y = self.view.bounds.size.height-self.toolBar.frame.size.height-self.tableView.frame.size.height;
         [UITableView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.tableView.frame = tableViewFrame;
             
         } completion:^(BOOL finished) {
             //self.tableView.hidden = NO;
             [self.tableView reloadData];
+            isListShow = YES;
+            self.showListButton.title = @"Hide list";
         }];
+    }else {
+        CGRect tableViewFram = self.tableView.frame;
+        tableViewFram.origin.y= self.view.bounds.size.height+self.tableView.bounds.size.height;
+        [UITableView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.tableView.frame = tableViewFram;
+            //self.tableView.hidden = YES;
+        } completion:^(BOOL finished) {
+            //self.tableView.hidden = YES;
+            isListShow = NO;
+            self.showListButton.title = @"Show List";
+        }];
+    }
+    
     
     
 }

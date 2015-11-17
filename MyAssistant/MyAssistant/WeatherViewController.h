@@ -15,4 +15,7 @@
 
 @property (strong,nonatomic) UITableView *tableView;
 
+@property (nonatomic) NSUInteger pageIndex;
+@property (strong,nonatomic) NSString *cityName;
+
 @end
